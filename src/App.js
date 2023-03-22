@@ -8,18 +8,21 @@ import Login from './pages/login';
 import About from './pages/about';
 import Footer from './components/footer';
 import './style.css';
+
 function App() {
   return (
     <Router>
-        <div className="app-wrapper">
-    <Navbar />
-    <Routes>
-        <Route path='/home' element={<Home/>} />
-        <Route path='/login' element={<Login/>} />
-        <Route path='/about' element={<About/>} />
-    </Routes>
-    </div>
-    <Footer/>
+      <div className="app-wrapper">
+        <Navbar />
+        <div className="content-wrapper">
+          <Routes>
+            <Route path='/home' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/about' element={<About />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
     </Router>
 
 );

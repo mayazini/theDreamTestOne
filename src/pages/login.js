@@ -77,7 +77,7 @@ function Login() {
             <a href="!#">Forgot password?</a>
           </div>
 
-          <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+          <MDBBtn className="mb-4 w-100 regBtn">Sign in</MDBBtn>
           <p className="text-center">Not a member? <a href="#!">Register</a></p>
 
         </MDBTabsPane>
@@ -85,7 +85,7 @@ function Login() {
         <MDBTabsPane show={justifyActive === 'tab2'}>
 
           <div className="text-center mb-3">
-            <p>Sign un with:</p>
+            <p>Sign up with:</p>
 
             <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
@@ -117,7 +117,7 @@ function Login() {
             <MDBCheckbox name='flexCheck' id='flexCheckDefault' label='I have read and agree to the terms' />
           </div>
 
-          <MDBBtn className="mb-4 w-100">Sign up</MDBBtn>
+          <MDBBtn className="mb-4 w-100 regBtn" >Sign up</MDBBtn>
 
         </MDBTabsPane>
 
