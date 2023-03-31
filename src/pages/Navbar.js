@@ -17,10 +17,10 @@ function Navbar() {
           <Dropdown.Item href="#/action-1" active>
             Log Out
           </Dropdown.Item>
-          <Dropdown.Item href="../sendMessage">send message</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">send nessage</Dropdown.Item>
           <Dropdown.Divider style={{ backgroundColor: 'black', height: '2px', borderWidth: '0px' }} />
-          <Dropdown.Item href="../myInbox">my inbox</Dropdown.Item>
-          <Dropdown.Item href="../myCreations">my creations</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">my inbox</Dropdown.Item>
+          <Dropdown.Item href="#/action-4">my creations</Dropdown.Item>
         </Dropdown.Menu >
       </Dropdown>
         <NavLink to="/home" activeStyle>

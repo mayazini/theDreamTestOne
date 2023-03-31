@@ -48,13 +48,24 @@ html, body, #root {
 
   .left-column {
     /* set a background color for the left column */
+    width: 30%;
+    display: flex;
+    height: 100%;
+    flex-Direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .right-column {
-    width: 50%;
+    width: 30%;
+    display: flex;
+    height: 100%;
+    flex-Direction: column;
+    justify-Content: space-between;
   }
 
   .img{
-    width: 50%;
-    height: 50%;
+    width: 25%;
+    margin-Bottom: 10px;
+    margin-left: 200px;
   }
