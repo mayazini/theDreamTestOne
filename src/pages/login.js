@@ -50,11 +50,15 @@ function Login() {
 
             <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                <MDBIcon fab icon='facebook-f' size="sm"/>
+              <a href='https://instagram.com/thedream4us?igshid=YmMyMTA2M2Y=' target="_blank" className='me-4 text-reset'>
+              <MDBIcon fab icon="instagram" size="sm"/>
+              </a>
               </MDBBtn>
 
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                <MDBIcon fab icon='twitter' size="sm"/>
+              <a href='https://m.youtube.com/channel/UCd0gqzV0hskK1z2Pui9lmDA?fbclid=PAAaZUiKWUYHMr329AocuwGDTQPZTntSi8fpVSEJRlvPfQIS7mLb8iNQ_IlV8' target="_blank" className='me-4 text-reset'>
+              <MDBIcon fab icon="youtube" size="sm"/>
+              </a>
               </MDBBtn>
 
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
@@ -89,11 +93,15 @@ function Login() {
 
             <div className='d-flex justify-content-between mx-auto' style={{width: '40%'}}>
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                <MDBIcon fab icon='facebook-f' size="sm"/>
+              <a href='https://instagram.com/thedream4us?igshid=YmMyMTA2M2Y=' target="_blank" className='me-4 text-reset'>
+              <MDBIcon fab icon="instagram" size="sm"/>
+              </a>
               </MDBBtn>
 
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
-                <MDBIcon fab icon='twitter' size="sm"/>
+              <a href='https://m.youtube.com/channel/UCd0gqzV0hskK1z2Pui9lmDA?fbclid=PAAaZUiKWUYHMr329AocuwGDTQPZTntSi8fpVSEJRlvPfQIS7mLb8iNQ_IlV8' target="_blank" className='me-4 text-reset'>
+              <MDBIcon fab icon="youtube" size="sm"/>
+              </a>
               </MDBBtn>
 
               <MDBBtn tag='a' color='none' className='m-1' style={{ color: '#1266f1' }}>
