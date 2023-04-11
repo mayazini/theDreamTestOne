@@ -1,8 +1,8 @@
 import React from 'react'
 import './../style.css';
 import developer from ".././images/developer.jpeg";
-import dreamer from ".././images/dreamer.jpeg";
-import user from ".././images/user.jpeg";
+import dreamer from ".././images/dreamer.png";
+import consumer from ".././images/consumer.jpeg";
 function home() {
   return (
     <div>
@@ -15,7 +15,7 @@ function home() {
       <div class="right-column">
       <img src={developer} alt="developer img" className="img"/>
       <img src={dreamer} alt="dreamer img" className="img"/>
-      <img src={user} alt="user img" className="img"/>
+      <img src={consumer} alt="consumer img" className="img"/>
       </div> 
       </section>
     </div>

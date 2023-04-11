@@ -39,6 +39,13 @@ html, body, #root {
     justify-content: center;
     align-items: center;
   }
+  .logo
+  {
+    width: 70%;
+    height: 85%;
+    margin-Bottom: 10px;
+    margin-left: 200px;
+  }
 
   .left-column,
   .right-column {

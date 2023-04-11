@@ -2,10 +2,9 @@ import React from 'react'
 
 function myInbox() {
   return (
-    <div>
-      
-    </div>
-  )
-}
-
+   
+    <div></div>
+    
+  );
+  }
 export default myInbox
