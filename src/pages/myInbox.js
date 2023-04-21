@@ -3,7 +3,7 @@ import React from 'react'
 function myInbox() {
   return (
    
-    <div></div>
+    <div className="content-wrapper"></div>
     
   );
   }

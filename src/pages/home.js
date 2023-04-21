@@ -5,7 +5,7 @@ import dreamer from ".././images/dreamer.png";
 import consumer from ".././images/consumer.jpeg";
 function home() {
   return (
-    <div>
+    <div className="content-wrapper">
       
       <section className="txtArea">
       <div class="left-column">

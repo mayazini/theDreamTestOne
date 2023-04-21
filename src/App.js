@@ -10,6 +10,7 @@ import Footer from './components/footer';
 import SendMessage from './pages/sendMessage';
 import MyInbox from './pages/myInbox';
 import MyCreations from './pages/myCreations';
+import Register from './pages/register';
 import './style.css';
 
 
@@ -18,16 +19,16 @@ function App() {
     <Router>
       <div className="app-wrapper">
         <Navbar />
-        <div className="content-wrapper">
           <Routes>
+          
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/about' element={<About />} />
             <Route path='/sendMessage' element={<SendMessage />} />
             <Route path='/myInbox' element={<MyInbox />} />
+            <Route path='/register' element={<Register />} />
             <Route path='/myCreations' element={<MyCreations />} />
           </Routes>
-        </div>
         <Footer />
       </div>
     </Router>

@@ -9,9 +9,9 @@ function Navbar() {
   return (
     <>
      <Nav>
-    <table>
+    <table style={{width: '100%', display: 'block', margin: '0 auto'}}>
       <tr style={{height: "100px"}}>
-        <td  style={{width:"45%", marginLeft: "80px"}}>
+        <td  style={{width:"50%", padding: '0 20px 0 0', margin: '0'}}>
         <NavMenu style={{fontSize: '17px', fontStyle: "normal"}}>
       <Dropdown>
         <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary" style={{backgroundColor: '#7eb7e6',color:"black"}}>
@@ -34,10 +34,10 @@ function Navbar() {
           login
         </NavLink>
         <Dropdown>
-        <Dropdown.Toggle id="dropdown-button" variant="primary" style={{backgroundColor: 'white',color:"black",boxShadow: "none"}}>
+        <Dropdown.Toggle id="dropdown-button"  style={{backgroundColor: 'white',color:"black",boxShadow: "none",border: 'none'}}>
           spaces
         </Dropdown.Toggle>
-        <Dropdown.Menu variant="dark" style={{fontSize: '17px', fontStyle: "normal"}}>
+        <Dropdown.Menu variant="dark" style={{fontSize: '17px'}}>
           <Dropdown.Item href="../sendMessage"> cinema</Dropdown.Item>
           <Dropdown.Item href="../myInbox">retail</Dropdown.Item>
           <Dropdown.Item href="../myCreations">finale products</Dropdown.Item>
@@ -45,7 +45,7 @@ function Navbar() {
       </Dropdown>
       </NavMenu>
         </td>
-        <td style={{width:"200%", marginLeft: "80px"}}>
+        <td style={{width:"50%", padding: '0', margin: '0 200px 0 0',padding:'0'}}>
         <img src={Logo} alt="logo img" className="logo"/>    
         </td>
         <td style={{width:"1%"}}>
