@@ -2,9 +2,11 @@ import React from 'react'
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
   import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+  import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+
 import './../style.css';
 import Logo from ".././images/logo.png";
+import GetStarted from ".././images/getStarted.jpeg";
 function Navbar() {
   return (
     <>
@@ -49,7 +51,9 @@ function Navbar() {
         <img src={Logo} alt="logo img" className="logo"/>    
         </td>
         <td style={{width:"1%"}}>
-        <img src={Logo} alt="logo img" className="logo"/>    
+        <a href="../register" rel="noreferrer">
+        <img src={GetStarted} alt="Coding Beauty logo" className="logo" style={{borderRadius: "0"}}></img>
+      </a>
         </td>
       </tr>
     </table>
