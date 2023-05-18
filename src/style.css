@@ -22,6 +22,7 @@ html, body, #root {
     display: flex; /* use flexbox for layout */
     justify-content: center; /* horizontally center the section element */
     align-items: center; /* vertically center the section element */
+    background-color: #ffffff;
   }
   
   footer {

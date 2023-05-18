@@ -11,6 +11,7 @@ import SendMessage from './pages/sendMessage';
 import MyInbox from './pages/myInbox';
 import MyCreations from './pages/myCreations';
 import Register from './pages/register';
+import Cinema from './pages/cinemaSpace';
 import './style.css';
 
 
@@ -28,6 +29,7 @@ function App() {
             <Route path='/myInbox' element={<MyInbox />} />
             <Route path='/register' element={<Register />} />
             <Route path='/myCreations' element={<MyCreations />} />
+            <Route path='/cinemaSpace' element={<Cinema />} />
           </Routes>
         <Footer />
       </div>

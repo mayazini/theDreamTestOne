@@ -2,7 +2,7 @@ import React from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';  
-import MyCinemaCreations from './myCinemaCreations';
+import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import ".././style.css"
 function MyCreations() {
 
@@ -16,17 +16,32 @@ function MyCreations() {
           <Tabs defaultActiveKey="tab1" id="my-page-tabs">
             <Tab eventKey="tab1" title="Cinema">
               <div class="content-wrapper">
-                my creations
-                 x
-                  
-                projects i joined
+                <MDBContainer>
+              <MDBRow className='bg mb-3'>
+               <h1>Projects I Created</h1>
+              </MDBRow>
+              <p>kkkkkk</p>
+              <MDBRow className='bg mb-3' style={{borderTop: 'solid'}}>
+                <h1>Projects I Joined</h1>
+              </MDBRow>
+            </MDBContainer>
               </div>
             </Tab>
             <Tab eventKey="tab2" title="Retail">
-              <div class="tab-content">Content for Tab 2 goes here</div>
+              <div class="tab-content">
+              <MDBContainer>
+              <MDBRow className='bg mb-3'>
+               <h1>Projects I Created</h1>
+              </MDBRow>
+              <p>kkkkkk</p>
+              <MDBRow className='bg mb-3' style={{borderTop: 'solid'}}>
+                <h1>Projects I Joined</h1>
+              </MDBRow>
+            </MDBContainer>
+                </div>
             </Tab>
             <Tab eventKey="tab3" title="Other">
-              <div class="tab-content">Content for Tab 3 goes here</div>
+              <div class="tab-content"></div>
             </Tab>
           </Tabs>
         </div>
