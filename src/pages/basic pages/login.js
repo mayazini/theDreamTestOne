@@ -5,9 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const GetUserData = (username, password) => {
   // Fetch user data from the API
   // Replace with your actual API call implementation
-  const url = `https://localhost:7225/api/User/GetUserData?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-  return fetch(url, {
-    method: 'POST'
+  return fetch('https://localhost:7225/api/User/GetUserData', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username, password })
   })
     .then(response => {
       if (!response.ok) {
