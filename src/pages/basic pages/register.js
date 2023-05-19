@@ -1,5 +1,5 @@
 import React from 'react'
-import future from '.././images/theFuture.jpeg'
+import future from '../.././images/theFuture.jpeg'
 
 import {
     MDBBtn,

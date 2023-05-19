@@ -3,14 +3,14 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route}
     from 'react-router-dom';
-import Home from './pages/home';
-import Login from './pages/login';
-import About from './pages/about';
+import Home from './pages/basic pages/home';
+import Login from './pages/basic pages/login';
+import About from './pages/basic pages/about';
 import Footer from './components/footer';
-import SendMessage from './pages/sendMessage';
-import MyInbox from './pages/myInbox';
+import SendMessage from './pages/messages/sendMessage';
+import MyInbox from './pages/messages/myInbox';
 import MyCreations from './pages/myCreations';
-import Register from './pages/register';
+import Register from './pages/basic pages/register';
 import Cinema from './pages/cinemaSpace';
 import './style.css';
 

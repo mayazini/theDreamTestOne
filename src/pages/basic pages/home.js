@@ -1,8 +1,8 @@
 import React from 'react'
-import './../style.css';
-import developer from ".././images/developer.jpeg";
-import dreamer from ".././images/dreamer.png";
-import consumer from ".././images/consumer.jpeg";
+import './../../style.css';
+import developer from "../.././images/developer.jpeg";
+import dreamer from "../.././images/dreamer.png";
+import consumer from "../.././images/consumer.jpeg";
 function home() {
   return (
     <div className="content-wrapper">
