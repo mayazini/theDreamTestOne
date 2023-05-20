@@ -12,6 +12,7 @@ import MyInbox from './pages/messages/myInbox';
 import MyCreations from './pages/myCreations';
 import Register from './pages/basic pages/register';
 import Cinema from './pages/cinemaSpace';
+import CreateCinema from './pages/createProject';
 import './style.css';
 
 
@@ -20,7 +21,7 @@ function App() {
     <Router>
       <div className="app-wrapper">
         <Navbar />
-          <Routes style={{height:"3000px"}}>          
+          <Routes>          
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/about' element={<About />} />
@@ -29,6 +30,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/myCreations' element={<MyCreations />} />
             <Route path='/cinemaSpace' element={<Cinema />} />
+            <Route path='/createProject' element={<CreateCinema />} />
           </Routes>
         <Footer />
       </div>

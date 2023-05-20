@@ -4,6 +4,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import CreateNewProject from './createProject';
 
 const ProjectCard = ({ project }) => {
   return (
@@ -66,7 +67,7 @@ const CinemaProjects = () => {
               </div>
             </Tab>
             <Tab eventKey='tab3' title='New Projects+'>
-              <div className='tab-content'></div>
+              <div className='content-wrapper'><CreateNewProject ></CreateNewProject></div>
             </Tab>
           </Tabs>
         </div>
