@@ -46,11 +46,11 @@ const CinemaProjects = () => {
           <Tabs defaultActiveKey='tab1' id='my-page-tabs'>
             <Tab eventKey='tab1' title='Projects'>
               <MDBContainer>
-                <MDBRow className='bg mb-3' style={{ height: '150px' }}></MDBRow>
-                <h2 className='text-center'>All Cinema Projects</h2>
+                <MDBRow className='bg mb-3' style={{ height: '50px' }}></MDBRow>
+
                 {chunkProjects(projects, 3).map((row, index) => (
                   <MDBRow className='card-row' key={index}>
-                    {row.map((project) => (
+                    {row.map((project, i) => (
                       <ProjectCard key={project.id} project={project} />
                     ))}
                   </MDBRow>

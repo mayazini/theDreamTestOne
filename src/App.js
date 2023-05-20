@@ -20,8 +20,7 @@ function App() {
     <Router>
       <div className="app-wrapper">
         <Navbar />
-          <Routes>
-          
+          <Routes style={{height:"3000px"}}>          
             <Route path='/home' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/about' element={<About />} />

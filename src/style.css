@@ -19,14 +19,19 @@ html, body, #root {
   
   .content-wrapper {
     flex: 1;
+    flex-grow: 1;
+    padding: 20px;
     display: flex; /* use flexbox for layout */
     justify-content: center; /* horizontally center the section element */
     align-items: center; /* vertically center the section element */
     background-color: #ffffff;
   }
   
-  footer {
-    height: 60px;
+
+  .footer {
+    margin-top: auto;
+    background-color: #f8f9fa;
+    padding: 20px;
   }
 
  .inputStyle{
@@ -126,10 +131,11 @@ html, body, #root {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
-   
-   
+    height: 100%;
+  
   }
 
 
-  
+  .card-row .mb-4 {
+    margin-bottom: 20px;
+  }
