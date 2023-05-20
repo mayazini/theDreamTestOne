@@ -1,34 +1,78 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import React, { useState, useEffect } from 'react';
+import CinemaCard from '../components/CinemaCard';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 
-import img from ".././images/consumer.jpeg";
-export default function cinemaSpace() {
+const ProjectCard = ({ project }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="140"
-        image={img}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+    <MDBCol md='4' className='mb-4'>
+      <CinemaCard project={project} />
+    </MDBCol>
   );
-}
+};
+
+const CinemaProjects = () => {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    // Fetch projects data from your API
+    fetch('https://localhost:7225/api/CinemaProjects/GetCinemaProjects', {
+      method: 'GET'
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setProjects(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error.message);
+      });
+  }, []);
+
+  const chunkProjects = (arr, size) => {
+    const chunkedArr = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunkedArr.push(arr.slice(i, i + size));
+    }
+    return chunkedArr;
+  };
+
+  return (
+    <div className='page-container'>
+      <div className='content-container'>
+        <h1 className='text-center'>Cinema Space</h1>
+        <div className='tab-container'>
+          <Tabs defaultActiveKey='tab1' id='my-page-tabs'>
+            <Tab eventKey='tab1' title='Projects'>
+              <MDBContainer>
+                <MDBRow className='bg mb-3' style={{ height: '150px' }}></MDBRow>
+                <h2 className='text-center'>All Cinema Projects</h2>
+                {chunkProjects(projects, 3).map((row, index) => (
+                  <MDBRow className='card-row' key={index}>
+                    {row.map((project) => (
+                      <ProjectCard key={project.id} project={project} />
+                    ))}
+                  </MDBRow>
+                ))}
+              </MDBContainer>
+            </Tab>
+            <Tab eventKey='tab2' title='My Projects'>
+              <div className='tab-content'>
+                <MDBContainer>
+                  <MDBRow className='bg mb-3'></MDBRow>
+                  <MDBRow className='bg mb-3' style={{ borderTop: 'solid' }}></MDBRow>
+                </MDBContainer>
+              </div>
+            </Tab>
+            <Tab eventKey='tab3' title='New Projects+'>
+              <div className='tab-content'></div>
+            </Tab>
+          </Tabs>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CinemaProjects;
