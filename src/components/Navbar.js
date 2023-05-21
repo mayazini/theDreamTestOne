@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../pages/UserContext';
-
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
   import Dropdown from 'react-bootstrap/Dropdown';
@@ -8,10 +6,10 @@ import { Nav, NavLink, NavMenu }
 import './../style.css';
 import Logo from ".././images/logo.png";
 import GetStarted from ".././images/getStarted.jpeg";
-
+import { UserContext } from '../pages/UserContext';
 
 function Navbar() {
-  const { user,setUser  } = useContext(UserContext);
+  const { user,setUser } = useContext(UserContext);
   const handleLogout = () => {
     // Perform logout logic, e.g., clearing session, server-side logout, etc.
     // Clear local storage
@@ -21,7 +19,6 @@ function Navbar() {
     // Redirect to the login page or other appropriate route
     // navigate('/login');
   };
-
   return (
     <>
       <>
@@ -30,7 +27,7 @@ function Navbar() {
           <tr style={{ height: '100px' }}>
             <td style={{ width: '50%', padding: '0 20px 0 0', margin: '0' }}>
               <NavMenu style={{ fontSize: '17px', fontStyle: 'normal' }}>
-                {user && (
+              {user && (
                   <Dropdown>
                     <Dropdown.Toggle
                       id="dropdown-button-dark-example1"

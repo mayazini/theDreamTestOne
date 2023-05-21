@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import './../../style.css';
 import developer from "../.././images/developer.jpeg";
 import dreamer from "../.././images/dreamer.png";
 import consumer from "../.././images/consumer.jpeg";
-function home() {
+
+function Home() {
+
   return (
     <div className="content-wrapper">
       
@@ -22,4 +24,4 @@ function home() {
   )
 }
 
-export default home
+export default Home

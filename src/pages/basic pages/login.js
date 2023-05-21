@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext  } from 'react';
+import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { UserContext } from './../UserContext.js';
 
 
 
@@ -37,10 +37,7 @@ const Login = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
-
   const { setUser } = useContext(UserContext);
-
-
   const handleSubmit = (event) => {
       event.preventDefault();
         GetUserData(username, password)
@@ -48,8 +45,8 @@ const Login = () => {
         // Handle the response
         console.log(data);
         // Show success message and redirect
-        setUser({ user: username });
-
+      
+        setUser({ username: username });
 
         setErrorMessage('Login successful. Redirecting to home page...');
         setTimeout(() => {
