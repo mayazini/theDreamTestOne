@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { UserContext } from './../UserContext.js';
+
+
 
 const GetUserData = (username, password) => {
   // Fetch user data from the API
@@ -34,6 +37,10 @@ const Login = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
 
+
+  const { setUser } = useContext(UserContext);
+
+
   const handleSubmit = (event) => {
       event.preventDefault();
         GetUserData(username, password)
@@ -41,9 +48,12 @@ const Login = () => {
         // Handle the response
         console.log(data);
         // Show success message and redirect
+        setUser({ user: username });
+
+
         setErrorMessage('Login successful. Redirecting to home page...');
         setTimeout(() => {
-          navigate('/home');
+          navigate('/');
         }, 3000);
       })
       .catch(error => {
@@ -117,7 +127,7 @@ const Login = () => {
                   </p>
                 </div>
                 <div className="d-grid gap-2 mt-3">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary"> 
                     Submit
                   </button>
                 </div>

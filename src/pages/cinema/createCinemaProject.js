@@ -1,8 +1,6 @@
-import 'mdb-react-ui-kit/dist/css/mdb.min.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../designPages/CreateNewProject.css'; // Import the custom CSS file
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const CreateNewProject = () => {
   const [projectName, setProjectName] = useState('');
@@ -43,34 +41,46 @@ const CreateNewProject = () => {
   };
 
   return (
-    <div className="content-wrapper">
-      <div className="col-lg-6 mb-5 mb-lg-0">
-        <div className="card rounded-7 custom-card">
+
+<div className="content-wrapper">
+  <div className="col-lg-12 d-flex justify-content-center align-items-center">
+    <form className="Auth-form">
+      <div className="Auth-form-content">
+        <div
+          className="card rounded-7 me-lg-n5"
+          style={{
+            background: "hsla(0, 0%, 100%, 0.55",
+            backdropFilter: "blur(30px)",
+            zIndex: "1",
+            width: "200%",
+            maxWidth: "500px"
+          }}
+        >
           <div className="card-body p-lg-5 shadow-5">
-            <form className="Auth-form-content">
-              <h3 className="Auth-form-title">Create New Project</h3>
-              <div className="form-group mt-3 inputStyle">
-                <label htmlFor="projectName">Project Name</label>
-                <input
-                  type="text"
-                  className="form-control mt-1"
-                  id="projectName"
-                  placeholder="Enter project name"
-                  value={projectName}
-                  onChange={(e) => setProjectName(e.target.value)}
-                />
-              </div>
-              <div className="form-group mt-3 inputStyle">
-                <label htmlFor="description">Description</label>
-                <textarea
-                  className="form-control mt-1"
-                  id="description"
-                  placeholder="Enter project description"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  rows="4"
-                ></textarea>
-              </div>
+            <h3 className="Auth-form-title">Create New Project</h3>
+            <div className="form-group mt-3">
+              <label>Project Name</label>
+              <input
+                type="text"
+                className="form-control mt-1"
+                id="projectName"
+                placeholder="Enter project name"
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Description</label>
+              <textarea
+                className="form-control mt-1"
+                id="description"
+                placeholder="Enter project description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                rows="4"
+              ></textarea>
+            </div>
+            <div className="d-grid gap-2 mt-3">
               <button
                 type="submit"
                 onClick={handleSubmission}
@@ -83,11 +93,13 @@ const CreateNewProject = () => {
                   {errorMessage}
                 </div>
               )}
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
+  </div>
+</div>
   );
 };
 

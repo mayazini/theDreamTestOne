@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import CinemaCard from '../components/CinemaCard';
+import CinemaCard from '../../components/CinemaCard';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import CreateNewProject from './createProject';
+import CreateNewProject from './createCinemaProject';
+import MyCreations from './myCinemaCreations';
 
 const ProjectCard = ({ project }) => {
   return (
@@ -61,13 +62,12 @@ const CinemaProjects = () => {
             <Tab eventKey='tab2' title='My Projects'>
               <div className='tab-content'>
                 <MDBContainer>
-                  <MDBRow className='bg mb-3'></MDBRow>
-                  <MDBRow className='bg mb-3' style={{ borderTop: 'solid' }}></MDBRow>
+                  <MDBRow className='bg mb-3'><MyCreations></MyCreations></MDBRow>            
                 </MDBContainer>
               </div>
             </Tab>
             <Tab eventKey='tab3' title='New Projects+'>
-              <div className='content-wrapper'><CreateNewProject ></CreateNewProject></div>
+             <CreateNewProject ></CreateNewProject>
             </Tab>
           </Tabs>
         </div>

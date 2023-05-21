@@ -11,18 +11,19 @@ import SendMessage from './pages/messages/sendMessage';
 import MyInbox from './pages/messages/myInbox';
 import MyCreations from './pages/myCreations';
 import Register from './pages/basic pages/register';
-import Cinema from './pages/cinemaSpace';
-import CreateCinema from './pages/createProject';
+import Cinema from './pages/cinema/cinemaSpace';
+import CreateCinema from './pages/cinema/createCinemaProject';
 import './style.css';
-
+import { UserProvider } from './pages/UserContext';
 
 function App() {
   return (
+    <UserProvider>
     <Router>
       <div className="app-wrapper">
         <Navbar />
           <Routes>          
-            <Route path='/home' element={<Home />} />
+            <Route exact path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/about' element={<About />} />
             <Route path='/sendMessage' element={<SendMessage />} />
@@ -35,7 +36,7 @@ function App() {
         <Footer />
       </div>
     </Router>
-
+    </UserProvider>
 );
 }
 
