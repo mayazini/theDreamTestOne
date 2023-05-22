@@ -3,6 +3,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+import MyCinemaCreations from './cinema/myCinemaCreations';
 import ".././style.css"
 function MyCreations() {
 
@@ -17,13 +18,7 @@ function MyCreations() {
             <Tab eventKey="tab1" title="Cinema">
               <div class="content-wrapper">
                 <MDBContainer>
-              <MDBRow className='bg mb-3'>
-               <h1>Projects I Created</h1>
-              </MDBRow>
-              <p>kkkkkk</p>
-              <MDBRow className='bg mb-3' style={{borderTop: 'solid'}}>
-                <h1>Projects I Joined</h1>
-              </MDBRow>
+               <MyCinemaCreations></MyCinemaCreations>
             </MDBContainer>
               </div>
             </Tab>

@@ -1,20 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { UserContext } from '../UserContext';
 
 const CreateNewProject = () => {
   const [projectName, setProjectName] = useState('');
   const [description, setDescription] = useState('');
+  const [CreatorName, setCreatorname] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
   const handleSubmission = (event) => {
     event.preventDefault();
-    const projectData = {
-      projectName,
-      description
-    };
-    inputData(projectData);
+    if (user) {
+      setCreatorname(user.username);
+      const projectData = {
+        projectName,
+        description,
+        CreatorName
+      };
+      inputData(projectData);
+    } else {
+      setErrorMessage('You need to be logged in to create a new project.');
+    }
   };
 
   const inputData = (projectData) => {
