@@ -48,6 +48,7 @@ function Register() {
         // Handle the registration error
       });
 
+    
    return (
     <div className='content-wrapper'>
       <MDBContainer fluid>
@@ -58,7 +59,7 @@ function Register() {
                 <h1>Sign up</h1>
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBIcon fas icon="user me-3" size='lg' />
-                  <MDBInput label='Your Name' id='form1' type='text' className='w-100' value={username} onChange={(e) => setName(e.target.value)} />
+                  <MDBInput label='Your Name' id='form1' type='text' className='w-100' value={username} onChange={(e) => setName(e.target.value)} required/>
                 </div>
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBIcon fas icon="envelope me-3" size='lg' />
@@ -72,9 +73,10 @@ function Register() {
                   <MDBIcon fas icon="key me-3" size='lg' />
                   <MDBInput label='Repeat your password' id='form4' type='password' value={repeatPassword} onChange={(e) => setRepeatPassword(e.target.value)} />
                 </div>
-                <div className='mb-4'>
+                
+                {/*<div className='mb-4'>
                   <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-                </div>
+                </div>*/}
                 <MDBBtn className='mb-4' size='lg' onClick={handleRegister}>Register</MDBBtn>
                 {errorMessage && (
                   <div className="alert alert-danger mt-3" role="alert">

@@ -11,6 +11,14 @@ const CreateNewProject = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
+  const [imageFile, setImageFile] = useState(null);
+
+  // Handle image file selection
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+  };
+
   const handleSubmission = (event) => {
     event.preventDefault();
     if (user) {
@@ -52,6 +60,7 @@ const CreateNewProject = () => {
   return (
 
 <div className="content-wrapper">
+  
   <div className="col-lg-12 d-flex justify-content-center align-items-center">
     <form className="Auth-form">
       <div className="Auth-form-content">
@@ -88,6 +97,18 @@ const CreateNewProject = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 rows="4"
               ></textarea>
+            </div>
+                <div className="form-group mt-3">
+              <label>An image for you project</label>
+              <input
+                className="form-control mt-1"
+                id="description"
+                placeholder="insert profile picture"
+                type="file" accept="image/*"
+                value={imageFile}
+                onChange={handleImageChange}
+                rows="4"
+              ></input>
             </div>
             <div className="d-grid gap-2 mt-3">
               <button
