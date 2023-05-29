@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UserContext } from '../UserContext';
@@ -6,27 +6,19 @@ import { UserContext } from '../UserContext';
 const CreateNewProject = () => {
   const [projectName, setProjectName] = useState('');
   const [description, setDescription] = useState('');
-  const [CreatorName, setCreatorname] = useState('');
+  const [creatorName, setCreatorName] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const { user, setUser } = useContext(UserContext);
 
-  const [imageFile, setImageFile] = useState(null);
-
-  // Handle image file selection
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-  };
-
   const handleSubmission = (event) => {
     event.preventDefault();
     if (user) {
-      setCreatorname(user.username);
+      setCreatorName(user.username);
       const projectData = {
         projectName,
         description,
-        CreatorName
+        creatorName
       };
       inputData(projectData);
     } else {
@@ -57,79 +49,57 @@ const CreateNewProject = () => {
       });
   };
 
-  return (
 
-<div className="content-wrapper">
-  
-  <div className="col-lg-12 d-flex justify-content-center align-items-center">
-    <form className="Auth-form">
-      <div className="Auth-form-content">
-        <div
-          className="card rounded-7 me-lg-n5"
-          style={{
-            background: "hsla(0, 0%, 100%, 0.55",
-            backdropFilter: "blur(30px)",
-            zIndex: "1",
-            width: "200%",
-            maxWidth: "500px"
-          }}
-        >
-          <div className="card-body p-lg-5 shadow-5">
-            <h3 className="Auth-form-title">Create New Project</h3>
-            <div className="form-group mt-3">
-              <label>Project Name</label>
-              <input
-                type="text"
-                className="form-control mt-1"
-                id="projectName"
-                placeholder="Enter project name"
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-              />
-            </div>
-            <div className="form-group mt-3">
-              <label>Description</label>
-              <textarea
-                className="form-control mt-1"
-                id="description"
-                placeholder="Enter project description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows="4"
-              ></textarea>
-            </div>
+  return (
+    <div className="content-wrapper">
+      <div className="col-lg-12 d-flex justify-content-center align-items-center">
+        <form className="Auth-form">
+          <div className="Auth-form-content">
+            <div className="card rounded-7 me-lg-n5" style={{ background: "hsla(0, 0%, 100%, 0.55", backdropFilter: "blur(30px)", zIndex: "1", width: "200%", maxWidth: "500px" }}>
+              <div className="card-body p-lg-5 shadow-5">
+                <h3 className="Auth-form-title">Create New Project</h3>
                 <div className="form-group mt-3">
-              <label>An image for you project</label>
-              <input
-                className="form-control mt-1"
-                id="description"
-                placeholder="insert profile picture"
-                type="file" accept="image/*"
-                value={imageFile}
-                onChange={handleImageChange}
-                rows="4"
-              ></input>
-            </div>
-            <div className="d-grid gap-2 mt-3">
-              <button
-                type="submit"
-                onClick={handleSubmission}
-                className="btn btn-primary btn-block mb-4"
-              >
-                Create Project
-              </button>
-              {errorMessage && (
-                <div className="alert alert-danger mt-3" role="alert">
-                  {errorMessage}
+                  <label>Project Name</label>
+                  <input
+                    type="text"
+                    className="form-control mt-1"
+                    id="projectName"
+                    placeholder="Enter project name"
+                    value={projectName}
+                    onChange={(e) => setProjectName(e.target.value)}
+                  />
                 </div>
-              )}
+                <div className="form-group mt-3">
+                  <label>Description</label>
+                  <textarea
+                    className="form-control mt-1"
+                    id="description"
+                    placeholder="Enter project description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    rows="4"
+                  ></textarea>
+                </div>
+                <div className="d-grid gap-2 mt-3">
+                  <button
+                    type="submit"
+                    onClick={handleSubmission}
+                    className="btn btn-primary btn-block mb-4"
+                  >
+                    Create Project
+                  </button>
+                  {errorMessage && (
+                    <div className="alert alert-danger mt-3" role="alert">
+                      {errorMessage}
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-    </form>
-  </div>
-</div>
+    </div>
   );
 };
 

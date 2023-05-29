@@ -36,7 +36,7 @@ export default function footer() {
           <MDBRow className='mt-3'>
             <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
-                <MDBIcon icon="gem" className="me-3" />
+                <MDBIcon icon="cloud" className="me-3" />
                 The Dream
               </h6>
               <p>

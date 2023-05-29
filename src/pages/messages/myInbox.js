@@ -1,117 +1,81 @@
-import React from 'react'
+import React, {  useContext, useState, useEffect } from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-function myInbox() {
+import { UserContext } from '../UserContext';
+
+function MyInbox() {
+  const [inboxData, setInboxData] = useState([]);
+  const { user,setUser } = useContext(UserContext);
+
+
+  // Fetch inbox data from the API
+  useEffect(() => {
+    if (user) {
+      // Fetch projects data from your API
+      fetch('https://localhost:7225/api/Inbox/Inbox', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username : user.username })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setInboxData(data);
+        })
+        .catch((error) => {
+          console.error('Error:', error.message);
+        });
+    }
+  }, [user]);
+
   return (
-   
     <div className="content-wrapper">
-       <MDBTable align='middle'>
+    <MDBTable align='middle'>
       <MDBTableHead>
         <tr>
-          <th scope='col'>Name</th>
-          <th scope='col'>Title</th>
-          <th scope='col'>Status</th>
-          <th scope='col'>Position</th>
+          <th scope='col'>Sender</th>
+          <th scope='col'>Subject</th>
+          <th scope='col'>Message</th>
+          <th scope='col'>Time</th>
           <th scope='col'>Actions</th>
         </tr>
       </MDBTableHead>
       <MDBTableBody>
-        <tr>
-          <td>
-            <div className='d-flex align-items-center'>
-              <img
-                src='https://mdbootstrap.com/img/new/avatars/8.jpg'
-                alt=''
-                style={{ width: '45px', height: '45px' }}
-                className='rounded-circle'
-              />
-              <div className='ms-3'>
-                <p className='fw-bold mb-1'>John Doe</p>
-                <p className='text-muted mb-0'>john.doe@gmail.com</p>
+        {inboxData.map((item, index) => (
+          <tr key={index}>
+            <td>
+              <div className='d-flex align-items-center'>
+                <img
+                  src={`https://mdbootstrap.com/img/new/avatars/${index + 1}.jpg`}
+                  alt=''
+                  style={{ width: '45px', height: '45px' }}
+                  className='rounded-circle'
+                />
+                <div className='ms-3'>
+                  <p className='fw-bold mb-1'>{item.SenderName}</p>
+                </div>
               </div>
-            </div>
-          </td>
-          <td>
-            <p className='fw-normal mb-1'>Software engineer</p>
-            <p className='text-muted mb-0'>IT department</p>
-          </td>
-          <td>
-            <MDBBadge color='success' pill>
-              Active
-            </MDBBadge>
-          </td>
-          <td>Senior</td>
-          <td>
-            <MDBBtn color='link' rounded size='sm'>
-              Edit
-            </MDBBtn>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div className='d-flex align-items-center'>
-              <img
-                src='https://mdbootstrap.com/img/new/avatars/6.jpg'
-                alt=''
-                style={{ width: '45px', height: '45px' }}
-                className='rounded-circle'
-              />
-              <div className='ms-3'>
-                <p className='fw-bold mb-1'>Alex Ray</p>
-                <p className='text-muted mb-0'>alex.ray@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p className='fw-normal mb-1'>Consultant</p>
-            <p className='text-muted mb-0'>Finance</p>
-          </td>
-          <td>
-            <MDBBadge color='primary' pill>
-              Onboarding
-            </MDBBadge>
-          </td>
-          <td>Junior</td>
-          <td>
-            <MDBBtn color='link' rounded size='sm'>
-              Edit
-            </MDBBtn>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div className='d-flex align-items-center'>
-              <img
-                src='https://mdbootstrap.com/img/new/avatars/7.jpg'
-                alt=''
-                style={{ width: '45px', height: '45px' }}
-                className='rounded-circle'
-              />
-              <div className='ms-3'>
-                <p className='fw-bold mb-1'>Kate Hunington</p>
-                <p className='text-muted mb-0'>kate.hunington@gmail.com</p>
-              </div>
-            </div>
-          </td>
-          <td>
-            <p className='fw-normal mb-1'>Designer</p>
-            <p className='text-muted mb-0'>UI/UX</p>
-          </td>
-          <td>
-            <MDBBadge color='warning' pill>
-              Awaiting
-            </MDBBadge>
-          </td>
-          <td>Senior</td>
-          <td>
-            <MDBBtn color='link' rounded size='sm'>
-              Edit
-            </MDBBtn>
-          </td>
-        </tr>
+            </td>
+            <td>
+              <p className='fw-normal mb-1'>{item.Subject}</p>
+            </td>
+            <td>
+              <p className='fw-normal mb-1'>{item.Message}</p>
+            </td>
+            <td>
+              <p className='fw-normal mb-1'>{item.Time}</p>
+            </td>
+            <td>
+              <MDBBtn color='link' rounded size='sm'>
+                Edit
+              </MDBBtn>
+            </td>
+          </tr>
+        ))}
       </MDBTableBody>
     </MDBTable>
-    </div>
-    
+  </div>
   );
-  }
-export default myInbox
+}
+
+export default MyInbox;

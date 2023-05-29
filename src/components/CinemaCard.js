@@ -10,21 +10,24 @@ import img from ".././images/consumer.jpeg";
 
 
 export default function CinemaCard({ project }) {
-  const { projectName, Description } = project;
+  const { projectName, Description,CreatorName } = project;
   return (
     <Card sx={{ width: '200px' }}>
        <CardMedia component="img" alt={projectName} maxHeight="300" image={img} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {projectName}
+          project name: {projectName}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {Description}
+          description: {Description}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+        creator: {CreatorName}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small">Apply</Button>
+        <Button size="small">Needed</Button>
       </CardActions>
     </Card>
   );

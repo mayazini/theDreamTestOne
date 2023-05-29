@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Nav, NavLink, NavMenu } 
     from "./NavbarElements";
   import Dropdown from 'react-bootstrap/Dropdown';
@@ -10,14 +11,17 @@ import { UserContext } from '../pages/UserContext';
 
 function Navbar() {
   const { user,setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const handleLogout = () => {
     // Perform logout logic, e.g., clearing session, server-side logout, etc.
     // Clear local storage
-    localStorage.clear();
+    sessionStorage.removeItem('user');
     // Reset user state
     setUser(null);
     // Redirect to the login page or other appropriate route
-    // navigate('/login');
+    setTimeout(() => {
+      navigate('/');
+    }, 3000);
   };
   return (
     <>
