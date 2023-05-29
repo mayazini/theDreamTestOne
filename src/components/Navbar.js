@@ -79,7 +79,7 @@ function Navbar() {
                   </Dropdown.Toggle>
                   <Dropdown.Menu variant="dark" style={{fontSize: '17px'}}>
                     <Dropdown.Item href="../cinemaSpace"> cinema</Dropdown.Item>
-                    <Dropdown.Item href="../myInbox">retail</Dropdown.Item>
+                    <Dropdown.Item href="../RetailSpace">retail</Dropdown.Item>
                     <Dropdown.Item href="../myCreations">finale products</Dropdown.Item>
                   </Dropdown.Menu >
                 </Dropdown>

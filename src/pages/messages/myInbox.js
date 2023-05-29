@@ -1,11 +1,13 @@
-import React, {  useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { UserContext } from '../UserContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaTrash, FaEnvelopeOpenText } from 'react-icons/fa';
 
 function MyInbox() {
   const [inboxData, setInboxData] = useState([]);
-  const { user,setUser } = useContext(UserContext);
-
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   // Fetch inbox data from the API
   useEffect(() => {
@@ -16,7 +18,7 @@ function MyInbox() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username : user.username })
+        body: JSON.stringify({ username: user.username })
       })
         .then((response) => response.json())
         .then((data) => {
@@ -28,53 +30,84 @@ function MyInbox() {
     }
   }, [user]);
 
+  // Handle click on "More" button
+  const handleMoreClick = (messageId) => {
+    navigate(`/inbox/${messageId}`);
+  };
+
+  // Handle delete message
+  const handleDeleteMessage = (messageId) => {
+    // Delete message logic goes here
+    console.log('Delete message:', messageId);
+  };
+
+  // Handle click on "Sent Messages" button
+  const handleSentMessagesClick = () => {
+    navigate('/sentMessages');
+  };
+
+  // Handle click on "Trash" button
+  const handleTrashClick = () => {
+    navigate('/trash');
+  };
+
   return (
     <div className="content-wrapper">
-    <MDBTable align='middle'>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'>Sender</th>
-          <th scope='col'>Subject</th>
-          <th scope='col'>Message</th>
-          <th scope='col'>Time</th>
-          <th scope='col'>Actions</th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        {inboxData.map((item, index) => (
-          <tr key={index}>
-            <td>
-              <div className='d-flex align-items-center'>
-                <img
-                  src={`https://mdbootstrap.com/img/new/avatars/${index + 1}.jpg`}
-                  alt=''
-                  style={{ width: '45px', height: '45px' }}
-                  className='rounded-circle'
-                />
-                <div className='ms-3'>
-                  <p className='fw-bold mb-1'>{item.SenderName}</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p className='fw-normal mb-1'>{item.Subject}</p>
-            </td>
-            <td>
-              <p className='fw-normal mb-1'>{item.Message}</p>
-            </td>
-            <td>
-              <p className='fw-normal mb-1'>{item.Time}</p>
-            </td>
-            <td>
-              <MDBBtn color='link' rounded size='sm'>
-                Edit
-              </MDBBtn>
-            </td>
+      <div className="mb-3">
+        
+      </div>
+      <MDBTable align="middle">
+        <MDBTableHead>
+          <tr>
+            <th scope="col">Sender</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Time</th>
+            <th scope="col">Actions</th>
+            <MDBBtn color="info" size="sm" onClick={handleSentMessagesClick}>
+          <FaEnvelopeOpenText className="me-1" />
+          Sent Messages
+        </MDBBtn>
+        <MDBBtn color="danger" size="sm" onClick={handleTrashClick} className='text-black'>
+          <FaTrash className="me-1" />
+          Trash
+        </MDBBtn>
           </tr>
-        ))}
-      </MDBTableBody>
-    </MDBTable>
-  </div>
+        </MDBTableHead>
+        <MDBTableBody>
+          {inboxData.map((item, index) => (
+            <tr key={index}>
+              <td>
+                <div className="d-flex align-items-center">
+                  <img
+                    src={`https://mdbootstrap.com/img/new/avatars/${index + 1}.jpg`}
+                    alt=""
+                    style={{ width: '45px', height: '45px' }}
+                    className="rounded-circle"
+                  />
+                  <div className="ms-3">
+                    <p className="fw-bold mb-1">{item.SenderName}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p className="fw-normal mb-1">{item.Subject}</p>
+              </td>
+              <td>
+                <p className="fw-normal mb-1">{item.Time}</p>
+              </td>
+              <td>
+                <MDBBtn color="link" rounded size="sm" onClick={() => handleMoreClick(item.Id)}>
+                  More
+                </MDBBtn>
+                <MDBBtn color="danger" rounded size="sm" onClick={() => handleDeleteMessage(item.Id)}>
+                  <FaTrash />
+                </MDBBtn>
+              </td>
+            </tr>
+          ))}
+        </MDBTableBody>
+      </MDBTable>
+    </div>
   );
 }
 
