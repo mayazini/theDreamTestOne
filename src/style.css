@@ -139,3 +139,10 @@ html, body, #root {
   .card-row .mb-4 {
     margin-bottom: 20px;
   }
+
+  .project-card {
+    margin-bottom: 20px;
+  }
+  .card-row {
+    margin-bottom: 20px;
+  }

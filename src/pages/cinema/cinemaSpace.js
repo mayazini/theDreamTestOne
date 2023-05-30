@@ -6,12 +6,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import CreateNewProject from './createCinemaProject';
 import MyCreations from './myCinemaCreations';
+import "../../style.css";
 
 const ProjectCard = ({ project }) => {
   return (
     <MDBCol md='4' className='mb-4'>
+    <div className='project-card'>
       <CinemaCard project={project} />
-    </MDBCol>
+    </div>
+  </MDBCol>
   );
 };
 
@@ -49,7 +52,7 @@ const CinemaProjects = () => {
             <Tab eventKey='tab1' title='Projects'>
               <MDBContainer>
                 <MDBRow className='bg mb-3' style={{ height: '50px' }}></MDBRow>
-
+                <MDBRow className='bg mb-3'>             
                 {chunkProjects(projects, 3).map((row, index) => (
                   <MDBRow className='card-row' key={index}>
                     {row.map((project, i) => (
@@ -57,6 +60,7 @@ const CinemaProjects = () => {
                     ))}
                   </MDBRow>
                 ))}
+              </MDBRow>
               </MDBContainer>
             </Tab>
             <Tab eventKey='tab2' title='My Projects'>
