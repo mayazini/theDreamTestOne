@@ -14,7 +14,7 @@ function MessagesInTrash() {
   useEffect(() => {
     if (user) {
       // Fetch projects data from your API
-      fetch('https://localhost:7225/api/Inbox/GetSentMessages', {
+      fetch('https://localhost:7225/api/Inbox/GetTrashByName', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ function MessagesInTrash() {
 
   // Handle click on "More" button
   const handleMoreClick = (messageId) => {
-    navigate(`/inbox/${messageId}`);
+    Navigate(`/inbox/${messageId}`);
   };
 
   // Handle delete message
@@ -72,7 +72,7 @@ function MessagesInTrash() {
     <MDBTable align="middle">
       <MDBTableHead>
         <tr>
-          <th scope="col">Receiver</th>
+          <th scope="col">Sender</th>
           <th scope="col">Subject</th>
           <th scope="col">Time</th>
           <th scope="col">Actions</th>
@@ -90,7 +90,7 @@ function MessagesInTrash() {
                   className="rounded-circle"
                 />
                 <div className="ms-3">
-                  <p className="fw-bold mb-1">{item.recieverName}</p>
+                  <p className="fw-bold mb-1">{item.senderName}</p>
                 </div>
               </div>
             </td>
@@ -105,7 +105,7 @@ function MessagesInTrash() {
                 More
               </MDBBtn>
               <MDBBtn color="danger" rounded size="sm" onClick={() => handleDeleteMessage(item.id)}>
-                Delete <FaTrash />
+                Delete 
               </MDBBtn>
             </td>
           </tr>

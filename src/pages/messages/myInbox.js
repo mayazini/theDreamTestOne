@@ -38,8 +38,8 @@ function MyInbox() {
   // Handle delete message
   const handleDeleteMessage = (messageId) => {
     // Delete message logic
-    fetch(`https://localhost:7225/api/Inbox/DeleteMessage/${messageId}`, {
-      method: 'DELETE',
+    fetch(`https://localhost:7225/api/Inbox/MoveToTrash/${messageId}`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       }
@@ -51,6 +51,7 @@ function MyInbox() {
           // Remove the deleted message from the inboxData state
           const updatedInboxData = inboxData.filter((item) => item.Id !== messageId);
           setInboxData(updatedInboxData);
+          navigate('/myInbox')
         } else {
           console.error('Error:', data.error);
         }
