@@ -17,6 +17,8 @@ import CreateCinema from './pages/cinema/createCinemaProject';
 import './style.css';
 import { UserProvider } from './pages/UserContext';
 import RetailSpace from './pages/Retail/RetailSpace';
+import SentMessages from './pages/messages/UsersSentMessages';
+import MessagesInTrash from './pages/messages/MessagesInTrash';
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
             <Route path='/cinemaSpace' element={<Cinema />} />
             <Route path='/createProject' element={<CreateCinema />} />
             <Route path='/RetailSpace' element={<RetailSpace />} />
+            <Route path='/SentMessages' element={<SentMessages />} />
+            <Route path='/MessagesInTrash' element={<MessagesInTrash />} />
           </Routes>
         <Footer />
       </div>

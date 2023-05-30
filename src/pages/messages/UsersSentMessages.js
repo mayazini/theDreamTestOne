@@ -4,8 +4,9 @@ import { UserContext } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrash, FaEnvelopeOpenText } from 'react-icons/fa';
 
-function MyInbox() {
-  const [inboxData, setInboxData] = useState([]);
+function UsersSentMessages() {
+
+  const [data, setData] = useState([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ function MyInbox() {
   useEffect(() => {
     if (user) {
       // Fetch projects data from your API
-      fetch('https://localhost:7225/api/Inbox/Inbox', {
+      fetch('https://localhost:7225/api/Inbox/GetTrashByName', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -22,7 +23,7 @@ function MyInbox() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setInboxData(data);
+            setData(data);
         })
         .catch((error) => {
           console.error('Error:', error.message);
@@ -37,7 +38,6 @@ function MyInbox() {
 
   // Handle delete message
   const handleDeleteMessage = (messageId) => {
-    // Delete message logic
     fetch(`https://localhost:7225/api/Inbox/DeleteMessage/${messageId}`, {
       method: 'DELETE',
       headers: {
@@ -45,29 +45,19 @@ function MyInbox() {
       }
     })
       .then((response) => response.json())
-      .then((data) => {
+      .then((RetrievedData) => {
         // Check if the message was deleted successfully
-        if (data.message) {
+        if (RetrievedData.message) {
           // Remove the deleted message from the inboxData state
-          const updatedInboxData = inboxData.filter((item) => item.Id !== messageId);
-          setInboxData(updatedInboxData);
+          const updatedInboxData = data.filter((item) => item.Id !== messageId);
+          setData(updatedInboxData);
         } else {
-          console.error('Error:', data.error);
+          console.error('Error:', RetrievedData.error);
         }
       })
       .catch((error) => {
         console.error('Error:', error.message);
       });
-  };
-
-  // Handle click on "Sent Messages" button
-  const handleSentMessagesClick = () => {
-    navigate('/SentMessages');
-  };
-
-  // Handle click on "Trash" button
-  const handleTrashClick = () => {
-    navigate('/MessagesInTrash');
   };
 
   return (
@@ -78,22 +68,14 @@ function MyInbox() {
       <MDBTable align="middle">
         <MDBTableHead>
           <tr>
-            <th scope="col">Sender</th>
+            <th scope="col">Reciever</th>
             <th scope="col">Subject</th>
             <th scope="col">Time</th>
             <th scope="col">Actions</th>
-            <MDBBtn color="info" size="sm" onClick={handleSentMessagesClick}>
-          <FaEnvelopeOpenText className="me-1" />
-          Sent Messages
-        </MDBBtn>
-        <MDBBtn color="danger" size="sm" onClick={handleTrashClick} className='text-black'>
-          <FaTrash className="me-1" />
-          Trash
-        </MDBBtn>
           </tr>
         </MDBTableHead>
         <MDBTableBody>
-          {inboxData.map((item, index) => (
+          {data.map((item, index) => (
             <tr key={index}>
               <td>
                 <div className="d-flex align-items-center">
@@ -104,21 +86,21 @@ function MyInbox() {
                     className="rounded-circle"
                   />
                   <div className="ms-3">
-                    <p className="fw-bold mb-1">{item.SenderName}</p>
+                    <p className="fw-bold mb-1">{item.recieverName}</p>
                   </div>
                 </div>
               </td>
               <td>
-                <p className="fw-normal mb-1">{item.Subject}</p>
+                <p className="fw-normal mb-1">{item.subject}</p>
               </td>
               <td>
-                <p className="fw-normal mb-1">{item.Time}</p>
+                <p className="fw-normal mb-1">{item.time}</p>
               </td>
               <td>
-                <MDBBtn color="link" rounded size="sm" onClick={() => handleMoreClick(item.Id)}>
+                <MDBBtn color="link" rounded size="sm" onClick={() => handleMoreClick(item.id)}>
                   More
                 </MDBBtn>
-                <MDBBtn color="danger" rounded size="sm" onClick={() => handleDeleteMessage(item.Id)}>
+                <MDBBtn color="danger" rounded size="sm" onClick={() => handleDeleteMessage(item.id)}>
                   move to trash<FaTrash />
                 </MDBBtn>
               </td>
@@ -130,4 +112,4 @@ function MyInbox() {
   );
 }
 
-export default MyInbox;
+export default UsersSentMessages;

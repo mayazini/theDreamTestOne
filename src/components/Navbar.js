@@ -21,7 +21,7 @@ function Navbar() {
     // Redirect to the login page or other appropriate route
     setTimeout(() => {
       navigate('/');
-    }, 3000);
+    }, 1000);
   };
   return (
     <>

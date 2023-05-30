@@ -37,7 +37,7 @@ export default function CinemaCard({ project }) {
             Project Name: {projectName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-          description: {description}
+          Description: {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Creator: {creatorName}

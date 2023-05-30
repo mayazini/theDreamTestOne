@@ -49,7 +49,8 @@ function MessageView() {
               <MDBCard>
                 <MDBCardBody>
                   <MDBCardText>Time: {message.Time}</MDBCardText>
-                  <MDBCardTitle>Sender: {message.SenderName}</MDBCardTitle>
+                  <MDBCardTitle>From: {message.SenderName}</MDBCardTitle>
+                  <MDBCardTitle>To: {message.RecieverName}</MDBCardTitle>
                   <MDBCardText>Subject: {message.Subject}</MDBCardText>
                   <MDBCardText>Message: {message.Message}</MDBCardText>
                 </MDBCardBody>
