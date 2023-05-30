@@ -11,8 +11,9 @@ import '../designPages/ApplyFormStyle.css';
 import img from ".././images/consumer.jpeg";
 
 export default function CinemaCard({ project }) {
-  const { projectName, Description, CreatorName } = project;
+  const { projectName, description, creatorName, requirements, needed } = project;
   const [open, setOpen] = React.useState(false);
+  const [selectedRequirement, setSelectedRequirement] = React.useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -22,24 +23,29 @@ export default function CinemaCard({ project }) {
     setOpen(false);
   };
 
+  const handleApply = (requirement) => {
+    setSelectedRequirement(requirement);
+    handleOpen();
+  };
+
   return (
     <>
       <Card sx={{ width: '200px' }}>
         <CardMedia component="img" alt={projectName} maxHeight="300" image={img} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            project name: {projectName}
+            Project Name: {projectName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            description: {Description}
+            Description: {description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            creator: {CreatorName}
+            Creator: {creatorName}
           </Typography>
         </CardContent>
         <CardActions>
           <Button size="small" onClick={handleOpen}>Apply</Button>
-          <Button size="small">Needed</Button>
+          <Button size="small" onClick={() => handleApply(null)}>Needed</Button>
         </CardActions>
       </Card>
 
@@ -52,22 +58,40 @@ export default function CinemaCard({ project }) {
       >
         <MDBCard>
           <MDBCardBody>
-            <MDBCardTitle>Apply Now</MDBCardTitle>
-            <form>
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input type="text" className="form-control" id="name" />
+            <MDBCardTitle>{selectedRequirement ? "Apply Now" : "Needed"}</MDBCardTitle>
+            {selectedRequirement ? (
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label">Name</label>
+                  <input type="text" className="form-control" id="name" />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">Linked In Link</label>
+                  <input type="email" className="form-control" id="email" />
+                </div>
+                {/*<div className="mb-3">
+                  <label htmlFor="resume" className="form-label">Resume</label>
+                  <input type="file" className="form-control" id="resume" />
+                  </div>*/}
+                <MDBBtn color="primary" type="submit">Submit Application</MDBBtn>
+              </form>
+            ) : (
+              <div>
+                {requirements.map((requirement, index) => (
+                  <div key={index} className="mb-3">
+                    <Typography variant="subtitle1" gutterBottom>
+                      {requirement.name}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Amount needed: {requirement.amount}
+                    </Typography>
+                    {needed > 0 && (
+                      <Button size="small" onClick={() => handleApply(requirement)}>Apply</Button>
+                    )}
+                  </div>
+                ))}
               </div>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" className="form-control" id="email" />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="resume" className="form-label">Resume</label>
-                <input type="file" className="form-control" id="resume" />
-              </div>
-              <MDBBtn color="primary" type="submit">Submit Application</MDBBtn>
-            </form>
+            )}
           </MDBCardBody>
         </MDBCard>
       </Modal>
