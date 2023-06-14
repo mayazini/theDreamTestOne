@@ -24,17 +24,17 @@ const ProjectCard = ({ project }) => {
 
     useEffect(() => {
       // Fetch projects data from your API
-      fetch('https://localhost:7225/api/CinemaProjects/GetRetailProjects', {
+      fetch('https://localhost:7225/api/Projects/GetProjectsBySpace/retail', {
         method: 'GET'
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setProjects(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error.message);
-        });
-    }, []);
+      .then((response) => response.json())
+      .then((data) => {
+        setProjects(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error.message);
+      });
+  }, []);
   
     const chunkProjects = (arr, size) => {
       const chunkedArr = [];

@@ -23,7 +23,7 @@ const CinemaProjects = () => {
 
   useEffect(() => {
     // Fetch projects data from your API
-    fetch('https://localhost:7225/api/CinemaProjects/GetCinemaProjects', {
+    fetch('https://localhost:7225/api/Projects/GetProjectsBySpace/cinema', {
       method: 'GET'
     })
       .then((response) => response.json())

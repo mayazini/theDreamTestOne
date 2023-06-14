@@ -7,9 +7,31 @@ function ApplyModal({ selectedRequirement, handleClose, handleApply }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [resume, setResume] = useState(null);
+  const [selectedFile, setSelectedFile] = useState();
   const ProjectId = 2;
-  
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+
+    try {
+      // Send the file to the server
+      await axios.post('https://localhost:7225/api/Applications/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Upload successful');
+    } catch (error) {
+      console.log('Upload failed:', error.message);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -18,25 +40,9 @@ function ApplyModal({ selectedRequirement, handleClose, handleApply }) {
     formData.append('applicationData.UserName', name);
     formData.append('applicationData.Email', email);
     formData.append('applicationData.Message', message);
-    formData.append('applicationData.ResumeData', resume);
-    formData.append('applicationData.ResumeStream', null);
     formData.append('applicationData.Requirement.RequirementId', 1);
     formData.append('applicationData.Requirement.Description', 'Requirement description');
 
-    if (resume) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const resumeStream = new Blob([event.target.result]);
-        formData.append('applicationData.ResumeStream', resumeStream);
-        sendApplication(formData);
-      };
-      reader.readAsArrayBuffer(resume);
-    } else {
-      sendApplication(formData);
-    }
-  };
-
-  const sendApplication = async (formData) => {
     try {
       // Send the form data to the server
       await axios.post('https://localhost:7225/api/Applications/Apply', formData, {
@@ -92,7 +98,8 @@ function ApplyModal({ selectedRequirement, handleClose, handleApply }) {
             </div>
             <div className="mb-3">
               <label htmlFor="resume" className="form-label">Resume (optional)</label>
-              <input type="file" className="form-control" id="resume" onChange={(e) => setResume(e.target.files[0])} />
+              <input type="file" onChange={handleFileChange} />
+              <button onClick={handleUpload}>Upload</button>
             </div>
             <MDBBtn color="primary" type="submit">Submit Application</MDBBtn>
           </form>

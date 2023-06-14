@@ -1,5 +1,15 @@
 import React from 'react';
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn } from 'mdb-react-ui-kit';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import img from ".././images/theFuture.jpeg";
+import '../designPages/ApplyFormStyle.css';
+import Modal from '@mui/material/Modal';
+import ApplyModal from './ApplyModal';
 
 export default function RetailCarde({ project }) {
   const { projectName, description, creatorName, requirements } = project;
@@ -32,61 +42,71 @@ export default function RetailCarde({ project }) {
 
   return (
     <>
-<MDBContainer>
-<MDBRow className="mt-5">
-  <MDBCol md="8">
-    <MDBCard>
-      <MDBCardBody>
-        <MDBCardTitle>About My Business</MDBCardTitle>
-        <MDBCardText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec urna eget nunc luctus efficitur. Mauris
-          id facilisis massa, sit amet commodo lorem. Nulla facilisi. Duis vitae nisi massa. Integer ut efficitur
-          felis. Cras rhoncus auctor justo, vitae condimentum lacus convallis eu.
-        </MDBCardText>
-      </MDBCardBody>
-    </MDBCard>
-  </MDBCol>
-  <MDBCol md="4">
-    <MDBCard>
-      <MDBCardBody>
-        <MDBCardTitle>Our Needs</MDBCardTitle>
-        <MDBCardText>
-          <ul>
-            <li>Experienced crochet artisans</li>
-            <li>Quality yarn suppliers</li>
-            <li>Online marketing experts</li>
-          </ul>
-        </MDBCardText>
-      </MDBCardBody>
-    </MDBCard>
-  </MDBCol>
-</MDBRow>
-<MDBRow className="mt-5">
-  <MDBCol>
-    <MDBCard>
-      <MDBCardBody>
-        <MDBCardTitle>Apply Now</MDBCardTitle>
-        <form>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">Name</label>
-            <input type="text" className="form-control" id="name" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">Email</label>
-            <input type="email" className="form-control" id="email" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="resume" className="form-label">Resume</label>
-            <input type="file" className="form-control" id="resume" />
-          </div>
-          <MDBBtn color="primary" type="submit">Submit Application</MDBBtn>
-        </form>
-      </MDBCardBody>
-    </MDBCard>
-  </MDBCol>
-</MDBRow>
-</MDBContainer>
-</>
+  <Card sx={{ width: '200px' }}>
+        <CardMedia component="img" alt={projectName} maxHeight="300" image={img} />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Project Name: {projectName}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Description: {description}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Creator: {creatorName}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small" onClick={handleNeededModalOpen}>Needed</Button>
+        </CardActions>
+      </Card>
+
+      <Modal
+        open={neededModalOpen}
+        onClose={handleNeededModalClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        className="custom-modal larger-modal"
+      >
+        <MDBCard>
+          <MDBCardBody>
+            <MDBCardTitle>This Project Needs</MDBCardTitle>
+            <form>
+              {requirements &&
+                requirements.map((requirement, index) => (
+                  <div key={index} className="mb-3">
+                    <MDBRow>
+                      <MDBCol>
+                        <Typography color="text">
+                          <p className="requirement-info">
+                            {requirement.description}
+                          </p>
+                        </Typography>
+                      </MDBCol>
+                      <MDBCol>
+                        <Button size="small" onClick={() => handleApplyModalOpen(requirement)}>
+                          Apply
+                        </Button>
+                      </MDBCol>
+                    </MDBRow>
+                  </div>
+                ))}
+            </form>
+          </MDBCardBody>
+        </MDBCard>
+      </Modal>
+
+      <Modal
+        open={applyModalOpen}
+        onClose={handleApplyModalClose}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        className="custom-modal"
+      >
+        <ApplyModal selectedRequirement={selectedRequirement} handleApply={handleApply} />
+      </Modal>
+    </>
+    
+ 
   );
 }
 
