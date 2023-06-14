@@ -29,7 +29,7 @@ function Navbar() {
       <Nav>
         <table style={{ width: '100%', display: 'block', margin: '0 auto' }}>
           <tr style={{ height: '100px' }}>
-            <td style={{ width: '50%', padding: '0 20px 0 0', margin: '0' }}>
+            <td style={{ width: '70%', padding: '0 20px 0 0', margin: '0' }}>
               <NavMenu style={{ fontSize: '17px', fontStyle: 'normal' }}>
               {user && (
                   <Dropdown>
@@ -72,7 +72,18 @@ function Navbar() {
                     <NavLink to="/login" activeStyle>
                       login
                     </NavLink>
-                
+                    {user && (
+                         <Dropdown>
+                         <Dropdown.Toggle id="dropdown-button"  style={{backgroundColor: 'white',color:"black",boxShadow: "none",border: 'none'}}>
+                           Admins pages
+                         </Dropdown.Toggle>
+                         <Dropdown.Menu variant="dark" style={{fontSize: '17px'}}>
+                           <Dropdown.Item href="../AdminCharts"> Admin Charts</Dropdown.Item>
+                           <Dropdown.Item href="../UserList">All users</Dropdown.Item>
+                           <Dropdown.Item href="../myCreations">finale products</Dropdown.Item>
+                         </Dropdown.Menu >
+                       </Dropdown>
+                    )}
                   <Dropdown>
                   <Dropdown.Toggle id="dropdown-button"  style={{backgroundColor: 'white',color:"black",boxShadow: "none",border: 'none'}}>
                     spaces

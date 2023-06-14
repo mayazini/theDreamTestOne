@@ -52,7 +52,7 @@ function MyCinemaCreations() {
           {chunkProjects(projects, 3).map((row, index) => (
             <MDBRow className='card-row' key={index}>
               {row.map((project, i) => (
-                <ProjectCard key={project.id} project={project} />
+                <ProjectCard key={project.Id} project={project} />
               ))}
             </MDBRow>
           ))}

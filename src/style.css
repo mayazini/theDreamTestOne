@@ -146,3 +146,9 @@ html, body, #root {
   .card-row {
     margin-bottom: 20px;
   }
+
+  .chart-container {
+    width: 400px;
+    height: 400px;
+    margin-bottom: -50px;
+  }

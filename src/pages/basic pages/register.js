@@ -59,7 +59,19 @@ function Register() {
                 <h1>Sign up</h1>
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBIcon fas icon="user me-3" size='lg' />
-                  <MDBInput label='Your Name' id='form1' type='text' className='w-100' value={username} onChange={(e) => setName(e.target.value)} required/>
+                  <MDBInput label='Your user Name' id='form1' type='text' className='w-100' value={username} onChange={(e) => setName(e.target.value)} required/>
+                </div>
+                <div className="d-flex flex-row align-items-center mb-4">
+                  <MDBIcon fas icon="user me-3" size='lg' />
+                  <MDBInput label='Your first name' id='form2' type='email'/>
+                </div>
+                <div className="d-flex flex-row align-items-center mb-4">
+                  <MDBIcon fas icon="user me-3" size='lg' />
+                  <MDBInput label='Your last name' id='form2' type='email'  />
+                </div>
+                <div className="d-flex flex-row align-items-center mb-4">
+                  <MDBIcon fas icon="link me-3" size='lg' />
+                  <MDBInput label='Your LinkedIn Link(optional)' id='form2' type='email' value={email} />
                 </div>
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBIcon fas icon="envelope me-3" size='lg' />

@@ -19,6 +19,9 @@ import { UserProvider } from './pages/UserContext';
 import RetailSpace from './pages/Retail/RetailSpace';
 import SentMessages from './pages/messages/UsersSentMessages';
 import MessagesInTrash from './pages/messages/MessagesInTrash';
+import AdminCharts from './pages/Admin/AdminCharts';
+import UserList from './pages/Admin/UserList';
+import MyComponent from './pages/Admin/MyComponent';
 
 function App() {
   return (
@@ -40,6 +43,9 @@ function App() {
             <Route path='/RetailSpace' element={<RetailSpace />} />
             <Route path='/SentMessages' element={<SentMessages />} />
             <Route path='/MessagesInTrash' element={<MessagesInTrash />} />
+            <Route path='/AdminCharts' element={<AdminCharts />} />
+            <Route path='/UserList' element={<UserList />} />
+            <Route path='/MyComponent' element={<MyComponent />} />
           </Routes>
         <Footer />
       </div>
