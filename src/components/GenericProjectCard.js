@@ -11,8 +11,8 @@ import Modal from '@mui/material/Modal';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import ApplyModal from './ApplyModal';
 
-export default function CinemaCard({ project }) {
-  const { projectName, description, creatorName, requirements } = project;
+export default function GenericProjectCard({ project }) {
+  const { projectName, description, creatorName, requirements,projectId } = project;
   const [neededModalOpen, setNeededModalOpen] = React.useState(false);
   const [applyModalOpen, setApplyModalOpen] = React.useState(false);
   const [selectedRequirement, setSelectedRequirement] = React.useState(null);
@@ -102,7 +102,7 @@ export default function CinemaCard({ project }) {
         aria-describedby="modal-description"
         className="custom-modal"
       >
-        <ApplyModal selectedRequirement={selectedRequirement} handleApply={handleApply} />
+        <ApplyModal selectedRequirement={selectedRequirement} projectId={projectId} handleApply={handleApply} />
       </Modal>
     </>
   );

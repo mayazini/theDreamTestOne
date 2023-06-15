@@ -31,6 +31,7 @@ function MyCreations() {
               <p>kkkkkk</p>
               <MDBRow className='bg mb-3' style={{borderTop: 'solid'}}>
                 <h1>Projects I Joined</h1>
+                
               </MDBRow>
             </MDBContainer>
                 </div>

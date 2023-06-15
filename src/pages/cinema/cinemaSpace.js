@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CinemaCard from '../../components/CinemaCard';
+import CinemaCard from '../../components/GenericProjectCard';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -23,7 +23,7 @@ const CinemaProjects = () => {
 
   useEffect(() => {
     // Fetch projects data from your API
-    fetch('https://localhost:7225/api/Projects/GetProjectsBySpace/cinema', {
+    fetch('https://localhost:7225/api/Projects/GetProjects/cinema', {
       method: 'GET'
     })
       .then((response) => response.json())

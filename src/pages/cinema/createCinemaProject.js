@@ -53,7 +53,7 @@ const CreateNewProject = () => {
       requirements: requirements.map(({ name, amount }) => ({ name, amount }))
     };
   
-    fetch('https://localhost:7225/api/CinemaProjects/CreateNewProject', {
+    fetch('https://localhost:7225/api/Projects/CreateNewProject', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'

@@ -2,12 +2,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { UserContext } from '../UserContext';
-import CinemaCard from '../../components/CinemaCard';
+import MyProjectCard from '../../components/MyProjectCards';
 
 const ProjectCard = ({ project }) => {
   return (
     <MDBCol md='4' className='mb-4'>
-      <CinemaCard project={project} />
+      <MyProjectCard project={project} />
     </MDBCol>
   );
 };
@@ -19,18 +19,15 @@ function MyCinemaCreations() {
   useEffect(() => {
     if (user) {
       // Fetch projects data from your API
-      fetch('https://localhost:7225/api/CinemaProjects/GetCinemaProjectsByName', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ CreatorName: user.username })
+      fetch(`https://localhost:7225/api/Projects/GetProjects/cinema/${user.username}`, {
+        method: 'Get'
       })
         .then((response) => response.json())
         .then((data) => {
           setProjects(data);
         })
         .catch((error) => {
+          
           console.error('Error:', error.message);
         });
     }

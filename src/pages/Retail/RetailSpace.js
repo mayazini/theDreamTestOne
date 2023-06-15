@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import CreateNewProject from '../cinema/createCinemaProject';
 import "../../style.css";
-import RetailCard from '../../components/RetailCard';
+import RetailCard from '../../components/GenericProjectCard';
 
 const ProjectCard = ({ project }) => {
   return (
@@ -24,7 +24,7 @@ const ProjectCard = ({ project }) => {
 
     useEffect(() => {
       // Fetch projects data from your API
-      fetch('https://localhost:7225/api/Projects/GetProjectsBySpace/retail', {
+      fetch('https://localhost:7225/api/Projects/GetProjects/retail', {
         method: 'GET'
       })
       .then((response) => response.json())

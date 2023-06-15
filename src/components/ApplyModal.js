@@ -3,66 +3,76 @@ import { MDBCard, MDBCardBody, MDBCardTitle, MDBBtn } from 'mdb-react-ui-kit';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
 
-function ApplyModal({ selectedRequirement, handleClose, handleApply }) {
-  const [name, setName] = useState('');
+function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply }) {
+  const [ApplicantName, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [selectedFile, setSelectedFile] = useState();
-  const ProjectId = 2;
+  const [ResumePath, setResumePath] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = async () => {
-    const formData = new FormData();
-    formData.append('file', selectedFile);
-
-    try {
-      // Send the file to the server
-      await axios.post('https://localhost:7225/api/Applications/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      console.log('Upload successful');
-    } catch (error) {
-      console.log('Upload failed:', error.message);
-    }
+  const handleUpload = () => {
+    const fileData = new FormData();
+    fileData.append('file', selectedFile);  // 'selectedFile' is a File object  
+    return fetch(`https://localhost:7225/api/Applications/UploadResume/${ApplicantName}`, {
+      method: 'POST',
+      body: fileData,
+    })
+    .then(response => {
+      if (!response.ok) {
+        setErrorMessage('application failed. Please try again.');
+        throw new Error(`Upload failed: ${response.status}`);
+      }
+  
+      return response.json();
+    })
+    .then(data => {
+      console.log('Upload successful:', data);
+      setErrorMessage('applied to project successfuly');
+    });
   };
+  
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('applicationData.ProjectId', ProjectId);
-    formData.append('applicationData.UserName', name);
-    formData.append('applicationData.Email', email);
-    formData.append('applicationData.Message', message);
-    formData.append('applicationData.Requirement.RequirementId', 1);
-    formData.append('applicationData.Requirement.Description', 'Requirement description');
-
-    try {
-      // Send the form data to the server
-      await axios.post('https://localhost:7225/api/Applications/Apply', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      // Handle the successful submission (e.g., show a success message, close the modal)
-      handleApplySuccess();
-    } catch (error) {
-      // Handle the error (e.g., show an error message)
-      console.log('Error:', error.response.data);
+    if (selectedFile!=null) {
+      console.log(selectedFile.name);
+      setResumePath(selectedFile.name);
     }
-  };
-
-  const handleApplySuccess = () => {
-    // Perform any actions after a successful application submission
-    // (e.g., show a success message, close the modal)
-    handleClose();
+    console.log(ResumePath);
+    // First, upload the file
+    handleUpload().then(() => {
+      const requestData = {
+         projectId,
+          ApplicantName,
+          email,
+          message,
+          selectedRequirement,
+          ResumePath
+      };
+     console.log(ApplicantName);
+      fetch('https://localhost:7225/api/Applications/Apply', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }).catch(error => {
+      console.error('upload file didnt work', error);
+    });
   };
 
   return (
@@ -78,15 +88,15 @@ function ApplyModal({ selectedRequirement, handleClose, handleApply }) {
           <MDBCardTitle>Apply Now</MDBCardTitle>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="name" className="form-label">Name</label>
-              <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+              <label htmlFor="ApplicantName" className="form-label">Name</label>
+              <input type="text" className="form-control" id="ApplicantName" value={ApplicantName} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email/phone number</label>
-              <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Message</label>
+              <label htmlFor="message" className="form-label">Message</label>
               <textarea
                 className="form-control mt-1"
                 id="message"
@@ -94,14 +104,19 @@ function ApplyModal({ selectedRequirement, handleClose, handleApply }) {
                 rows="4"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                
               ></textarea>
             </div>
             <div className="mb-3">
               <label htmlFor="resume" className="form-label">Resume (optional)</label>
               <input type="file" onChange={handleFileChange} />
-              <button onClick={handleUpload}>Upload</button>
             </div>
             <MDBBtn color="primary" type="submit">Submit Application</MDBBtn>
+              {errorMessage && (
+                <div className="alert alert-danger mt-3" role="alert">
+                  {errorMessage}
+                </div>
+              )}
           </form>
         </MDBCardBody>
       </MDBCard>
