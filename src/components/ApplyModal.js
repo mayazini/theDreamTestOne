@@ -60,7 +60,7 @@ function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply })
           email,
           message,
           selectedRequirement,
-          ResumePath
+          ResumePath:selectedFile.name
       };
      console.log(ApplicantName);
       fetch('https://localhost:7225/api/Applications/Apply', {
@@ -106,7 +106,8 @@ function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply })
                 rows="4"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                
+                maxLength={100}
+                required
               ></textarea>
             </div>
             <div className="mb-3">

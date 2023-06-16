@@ -14,19 +14,20 @@ function ViewApplicants() {
       .then((response) => response.json())
       .then((data) => {
         setApplicants(data);
+        console.log(data)
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   };
 
-  const handleApproveUser = (applicationId, userName) => {
-    fetch(`https://your-api-url.com/api/UpdateApplicationStatus/${applicationId}`, {
+  const handleApproveUser = (applicationId) => {
+    fetch(`https://localhost:7225/api/Applications/UpdateApplicationStatus/${applicationId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ status: 'approved' }),
+      body: JSON.stringify({ status: 'Approved' }),
     })
       .then(() => {
         fetchApplicants();
@@ -36,13 +37,13 @@ function ViewApplicants() {
       });
   };
 
-  const handleDisapproveUser = (applicationId, userName) => {
-    fetch(`https://your-api-url.com/api/UpdateApplicationStatus/${applicationId}`, {
+  const handleDisapproveUser = (applicationId) => {
+    fetch(`https://localhost:7225/api/Applications/UpdateApplicationStatus/${applicationId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ status: 'not approved' }),
+      body: JSON.stringify({ status: 'Declined' }),
     })
       .then(() => {
         fetchApplicants();
@@ -103,25 +104,25 @@ function ViewApplicants() {
         </thead>
         <tbody>
           {applicants.map((application) => (
-            <tr key={application.id}>
+            <tr key={application.Id}>
               <td>{application.ReqDescription}</td>
               <td>{application.ApplicantName}</td>
               <td>{application.Email}</td>
               <td>{application.Message}</td>
-              <td>{application.Status === 'Pending' ? 'Not viewed' : application.Status}</td>
+              <td>{application.ApplicationStatus === 'Pending' ? 'Not viewed' : application.ApplicationStatus}</td>
               <td>
                 <button onClick={() => handleDownload(application.ResumePath, application.UserName)}>Download</button>
               </td>
               <td>
                 {application.Status === 'Accepted' ? (
-                  <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.id, application.UserName)}>
+                  <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.Id, application.UserName)}>
                     Disapprove
                   </button>
                 ) : (
-                  <>  <button className="btn btn-success" onClick={() => handleApproveUser(application.id, application.UserName)}>
+                  <>  <button className="btn btn-success" onClick={() => handleApproveUser(application.Id, application.UserName)}>
                   Approve
                 </button>
-                 <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.id, application.UserName)}>
+                 <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.Id, application.UserName)}>
                  Disapprove
                </button></>
                 )}
