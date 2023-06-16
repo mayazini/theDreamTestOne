@@ -87,7 +87,7 @@ function AdminCharts() {
               precision: 0,
               title: {
                 display: true,
-                text: 'Count',
+                text: 'Events',
               },
             },
           },
@@ -97,7 +97,7 @@ function AdminCharts() {
   }
   
 
-  return  <ProtectedRoute allowedRoles={['admin']}><center><div id="chartContainer" className="chart-container"></div></center></ProtectedRoute>;
+  return  <ProtectedRoute allowedRoles={['admin']}><center><h1>Site data as of {moment().format('MMMM YYYY')}</h1><div id="chartContainer" className="chart-container"></div></center></ProtectedRoute>;
 }
 
 export default AdminCharts;

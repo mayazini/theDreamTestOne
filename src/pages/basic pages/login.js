@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext  } from 'react';
 import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 const GetUserData = (username, password) => {
   return fetch('https://localhost:7225/api/User/Login', {
@@ -88,6 +89,7 @@ const Login = () => {
   }, []);
 
   return (
+    <ProtectedRoute allowedRoles={['guest']}>
     <div className="content-wrapper">
       <div className="col-lg-6 mb-5 mb-lg-0">
         <form className="Auth-form" onSubmit={handleSubmit}>
@@ -144,6 +146,7 @@ const Login = () => {
         </form>
       </div>
     </div>
+    </ProtectedRoute>
   );
 };
 

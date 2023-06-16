@@ -19,7 +19,7 @@ const CreateNewProject = () => {
       const projectData = {
         projectName,
         description,
-        creatorName,
+        creatorName:user.username,
         requirements
       };
       inputData(projectData);

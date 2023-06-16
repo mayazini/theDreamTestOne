@@ -13,6 +13,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const navigate = useNavigate();
 
   if (allowedRoles.includes(userRole)) {
+    console.log(userRole);
     return children;
   } else {
     setTimeout(() => {

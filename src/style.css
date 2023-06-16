@@ -18,9 +18,6 @@ html, body, #root {
   }
   
   .content-wrapper {
-    flex: 1;
-    flex-grow: 1;
-    padding: 20px;
     display: flex; /* use flexbox for layout */
     justify-content: center; /* horizontally center the section element */
     align-items: center; /* vertically center the section element */

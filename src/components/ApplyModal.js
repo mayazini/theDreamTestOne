@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBBtn } from 'mdb-react-ui-kit';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
+import { UserContext } from '../pages/UserContext';
 
 function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply }) {
   const [ApplicantName, setName] = useState('');
@@ -10,6 +11,11 @@ function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply })
   const [selectedFile, setSelectedFile] = useState();
   const [ResumePath, setResumePath] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { user } = useContext(UserContext);
+
+    useEffect(() => {
+      setName(user.username);
+    }, []); // Run only once on component mount
 
 
   const handleFileChange = (event) => {
@@ -87,10 +93,6 @@ function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply })
         <MDBCardBody>
           <MDBCardTitle>Apply Now</MDBCardTitle>
           <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="ApplicantName" className="form-label">Name</label>
-              <input type="text" className="form-control" id="ApplicantName" value={ApplicantName} onChange={(e) => setName(e.target.value)} required />
-            </div>
             <div className="mb-3">
               <label htmlFor="email" className="form-label">Email/phone number</label>
               <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />

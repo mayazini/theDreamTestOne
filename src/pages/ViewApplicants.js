@@ -20,8 +20,8 @@ function ViewApplicants() {
       });
   };
 
-  const handleApproveUser = (userId) => {
-    fetch(`https://your-api-url.com/api/UpdateUserStatus/${userId}`, {
+  const handleApproveUser = (applicationId, userName) => {
+    fetch(`https://your-api-url.com/api/UpdateApplicationStatus/${applicationId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -36,8 +36,8 @@ function ViewApplicants() {
       });
   };
 
-  const handleDisapproveUser = (userId) => {
-    fetch(`https://your-api-url.com/api/UpdateUserStatus/${userId}`, {
+  const handleDisapproveUser = (applicationId, userName) => {
+    fetch(`https://your-api-url.com/api/UpdateApplicationStatus/${applicationId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -102,25 +102,28 @@ function ViewApplicants() {
           </tr>
         </thead>
         <tbody>
-          {applicants.map((user) => (
-            <tr key={user.id}>
-              <td>{user.ReqDescription}</td>
-              <td>{user.UserName}</td>
-              <td>{user.Email}</td>
-              <td>{user.Message}</td>
-              <td>{user.Status ? 'Approved' : 'Not Approved'}</td>
+          {applicants.map((application) => (
+            <tr key={application.id}>
+              <td>{application.ReqDescription}</td>
+              <td>{application.ApplicantName}</td>
+              <td>{application.Email}</td>
+              <td>{application.Message}</td>
+              <td>{application.Status === 'Pending' ? 'Not viewed' : application.Status}</td>
               <td>
-                <button onClick={() => handleDownload(user.ResumePath, user.UserName)}>Download</button>
+                <button onClick={() => handleDownload(application.ResumePath, application.UserName)}>Download</button>
               </td>
               <td>
-                {user.Status ? (
-                  <button className="btn btn-warning" onClick={() => handleDisapproveUser(user.id)}>
+                {application.Status === 'Accepted' ? (
+                  <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.id, application.UserName)}>
                     Disapprove
                   </button>
                 ) : (
-                  <button className="btn btn-danger" onClick={() => handleApproveUser(user.id)}>
-                    Approve
-                  </button>
+                  <>  <button className="btn btn-success" onClick={() => handleApproveUser(application.id, application.UserName)}>
+                  Approve
+                </button>
+                 <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.id, application.UserName)}>
+                 Disapprove
+               </button></>
                 )}
               </td>
             </tr>

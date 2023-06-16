@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ProtectedRoute from '../../components/ProtectedRoute';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -9,41 +8,41 @@ function UserList() {
   }, []);
 
   const fetchUsers = async () => {
-      const response = await fetch('https://localhost:7225/api/User/GetAllUsers', {
-        method: 'GET',
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setUsers(data);
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error('Error:', error.message);
-        });
+    try {
+      const response = await fetch('https://localhost:7225/api/User/GetAllUsers');
+      const data = await response.json();
+      console.log(data);
+      setUsers(data);
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
   };
 
-  const handleDeleteUser = async (userId) => {
-    try {
-      // Send a delete request to the server to delete the user
-      await fetch(`https://your-api-url.com/api/DeleteUser/${userId}`, { method: 'DELETE' });
-
-      // Update the user list by fetching the updated data
-      fetchUsers();
-    } catch (error) {
-      console.error('Error:', error);
+  const handleDeleteUser = async (userName) => {
+    const confirmed = window.confirm('Are you sure you want to delete this user?');
+    if (confirmed) {
+      try {
+        await fetch(`https://localhost:7225/api/User/DeleteUser/${userName}`, { method: 'DELETE' });
+        fetchUsers();
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
   return (
-    <ProtectedRoute allowedRoles={['admin']}>
     <div className="container">
       <h1>User List</h1>
       <table className="table">
         <thead>
           <tr>
             <th>Username</th>
-            <th>Email</th>
+            <th>FirstName</th>
+            <th>LastName</th>
             <th>Age</th>
+            <th>LinkedInLink</th>
+            <th>Admin</th>
+            <th>Email</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -51,10 +50,14 @@ function UserList() {
           {users.map((user) => (
             <tr key={user.Id}>
               <td>{user.userName}</td>
-              <td>{user.email}</td>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
               <td>{user.age}</td>
+              <td>{user.linkedInLink}</td>
+              <td>{user.isAdmin ? 'Yes' : 'No'}</td>
+              <td>{user.email}</td>
               <td>
-                <button className="btn btn-danger" onClick={() => handleDeleteUser(user.Id)}>
+                <button className="btn btn-danger" onClick={() => handleDeleteUser(user.userName)}>
                   Delete
                 </button>
               </td>
@@ -63,7 +66,6 @@ function UserList() {
         </tbody>
       </table>
     </div>
-    </ProtectedRoute>
   );
 }
 

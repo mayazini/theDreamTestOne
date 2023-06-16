@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import future from '../.././images/theFuture.jpeg';
 import { MDBBtn, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBCardImage, MDBInput, MDBIcon, MDBCheckbox } from 'mdb-react-ui-kit';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function Register() {
   const [username, setName] = useState('');
@@ -50,6 +51,7 @@ function Register() {
 
     
    return (
+    <ProtectedRoute allowedRoles={['guest']}>
     <div className='content-wrapper'>
       <MDBContainer fluid>
         <MDBCard className='text-black m-5' style={{ borderRadius: '25px' }}>
@@ -104,6 +106,7 @@ function Register() {
         </MDBCard>
       </MDBContainer>
     </div>
+    </ProtectedRoute>
   );
 }
 

@@ -69,9 +69,9 @@ function Navbar() {
                     <NavLink to="/" activeStyle>
                       home page
                     </NavLink>
-                    <NavLink to="/login" activeStyle>
+                    {!user &&(<NavLink to="/login" activeStyle>
                       login
-                    </NavLink>
+                    </NavLink>)}
                     {user && user.isAdmin && (
                          <Dropdown>
                          <Dropdown.Toggle id="dropdown-button"  style={{backgroundColor: 'white',color:"black",boxShadow: "none",border: 'none'}}>
@@ -80,7 +80,6 @@ function Navbar() {
                          <Dropdown.Menu variant="dark" style={{fontSize: '17px'}}>
                            <Dropdown.Item href="../AdminCharts"> Admin Charts</Dropdown.Item>
                            <Dropdown.Item href="../UserList">All users</Dropdown.Item>
-                           <Dropdown.Item href="../myCreations">finale products</Dropdown.Item>
                          </Dropdown.Menu >
                        </Dropdown>
                     )}
@@ -102,9 +101,9 @@ function Navbar() {
               <img src={Logo} alt="logo img" className="logo" />
             </td>
             <td style={{ width: '1%' }}>
-              <a href="../register" rel="noreferrer">
+            {!user &&(<a href="../register" rel="noreferrer">
                 <img src={GetStarted} alt="Coding Beauty logo" className="logo" style={{ borderRadius: '0' }}></img>
-              </a>
+              </a>)}
             </td>
           </tr>
         </table>

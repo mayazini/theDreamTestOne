@@ -21,7 +21,6 @@ import SentMessages from './pages/messages/UsersSentMessages';
 import MessagesInTrash from './pages/messages/MessagesInTrash';
 import AdminCharts from './pages/Admin/AdminCharts';
 import UserList from './pages/Admin/UserList';
-import MyComponent from './pages/Admin/MyComponent';
 import ViewApplicants from './pages/ViewApplicants';
 
 function App() {
@@ -47,7 +46,6 @@ function App() {
             <Route path='/MessagesInTrash' element={<MessagesInTrash />} />
             <Route path='/AdminCharts' element={<AdminCharts />} />
             <Route path='/UserList' element={<UserList />} />
-            <Route path='/MyComponent' element={<MyComponent />} />
             <Route exact path="/ViewApplicants/:projectId" element={<ViewApplicants />}  />
           </Routes>
         </div>
