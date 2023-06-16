@@ -72,7 +72,7 @@ function Navbar() {
                     <NavLink to="/login" activeStyle>
                       login
                     </NavLink>
-                    {user && (
+                    {user && user.isAdmin && (
                          <Dropdown>
                          <Dropdown.Toggle id="dropdown-button"  style={{backgroundColor: 'white',color:"black",boxShadow: "none",border: 'none'}}>
                            Admins pages

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,8 +10,11 @@ import '../designPages/ApplyFormStyle.css';
 import Modal from '@mui/material/Modal';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import ApplyModal from './ApplyModal';
+import { UserContext } from '../pages/UserContext';
+
 
 export default function GenericProjectCard({ project }) {
+  const { user,setUser } = useContext(UserContext);
   const { projectName, description, creatorName, requirements,projectId } = project;
   const [neededModalOpen, setNeededModalOpen] = React.useState(false);
   const [applyModalOpen, setApplyModalOpen] = React.useState(false);
@@ -56,7 +59,11 @@ export default function GenericProjectCard({ project }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={handleNeededModalOpen}>Needed</Button>
+          {user ? (
+            <Button size="small" onClick={handleNeededModalOpen}>Needed</Button>
+          ) : (
+            <p   style={{color: 'red'}}>Applying for projects is for logged in users only</p>
+          )}
         </CardActions>
       </Card>
 

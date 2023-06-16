@@ -3,12 +3,8 @@ import { UserContext } from '../UserContext';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-
-
 const GetUserData = (username, password) => {
-  // Fetch user data from the API
-  // Replace with your actual API call implementation
-  return fetch('https://localhost:7225/api/User/GetUserData', {
+  return fetch('https://localhost:7225/api/User/Login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -17,7 +13,14 @@ const GetUserData = (username, password) => {
   })
     .then(response => {
       if (!response.ok) {
-        throw new Error('Request failed');
+        return response.json().then(json => {
+          // If the status code is 500, show a generic error message
+          // Otherwise, show the error message from the server
+          const message = response.status === 500
+            ? 'Failed to log in. Please try again.'
+            : json.error;
+          throw new Error(message);
+        });
       }
       return response.json();
     })
@@ -30,6 +33,7 @@ const GetUserData = (username, password) => {
     });
 };
 
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -38,25 +42,23 @@ const Login = () => {
   const formRef = useRef(null);
 
   const { setUser } = useContext(UserContext);
-  const handleSubmit = (event) => {
-      event.preventDefault();
-        GetUserData(username, password)
-      .then(data => {
-        // Handle the response
-        console.log(data);
-        // Show success message and redirect
-      
-        setUser({ username: username });
 
-        setErrorMessage('Login successful. Redirecting to home page...');
-        setTimeout(() => {
-          navigate('/');
-        }, 3000);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    GetUserData(username, password)
+      .then(data => {
+          console.log(data);
+          const isAdmin = data.isAdmin;
+          setUser({ username: username, isAdmin: isAdmin });
+  
+          setErrorMessage('Login successful. Redirecting to home page...');
+          setTimeout(() => {
+            navigate('/');
+          }, 3000);
       })
       .catch(error => {
-        console.error(error);
-        // Show error message
-        setErrorMessage('Invalid username or password. Please try again.');
+          console.error(error);
+          setErrorMessage(error.message);
       });
   };
 

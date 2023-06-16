@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import CreateNewProject from './createCinemaProject';
 import MyCreations from './myCinemaCreations';
+import ProtectedTab from '../../components/ProtectedTab';
 import "../../style.css";
 
 const ProjectCard = ({ project }) => {
@@ -63,16 +64,16 @@ const CinemaProjects = () => {
               </MDBRow>
               </MDBContainer>
             </Tab>
-            <Tab eventKey='tab2' title='My Projects'>
-              <div className='tab-content'>
-                <MDBContainer>
-                  <MDBRow className='bg mb-3'><MyCreations></MyCreations></MDBRow>            
-                </MDBContainer>
-              </div>
-            </Tab>
-            <Tab eventKey='tab3' title='New Projects+'>
-             <CreateNewProject ></CreateNewProject>
-            </Tab>
+            <ProtectedTab eventKey='tab2' title='My Projects' allowedRoles={['loggedIn', 'admin']}>
+          <div className='tab-content'>
+            <MDBContainer>
+              <MDBRow className='bg mb-3'><MyCreations></MyCreations></MDBRow>            
+            </MDBContainer>
+          </div>
+        </ProtectedTab>
+        <ProtectedTab eventKey='tab3' title='New Projects+' allowedRoles={['loggedIn', 'admin']}>
+          <CreateNewProject />
+        </ProtectedTab>
           </Tabs>
         </div>
       </div>

@@ -3,6 +3,8 @@ import Chart from 'chart.js/auto';
 import moment from 'moment';
 import 'moment/locale/en-gb';
 import 'chartjs-adapter-moment';
+import '../../designPages/Charts.css'
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function AdminCharts() {
   useEffect(() => {
@@ -22,9 +24,12 @@ function AdminCharts() {
 
   function displayChartData(chartData) {
     const groupedData = {};
+    const eventTypesSet = new Set(); // Keep track of unique event types
+    
     chartData.forEach((dataItem) => {
-      const eventType = dataItem.eventType;
-      if (!groupedData[eventType]) {
+      const eventType = dataItem.EventType;
+      if (!eventTypesSet.has(eventType)) {
+        eventTypesSet.add(eventType);
         groupedData[eventType] = [];
       }
       groupedData[eventType].push(dataItem);
@@ -34,11 +39,7 @@ function AdminCharts() {
       const eventData = groupedData[eventType];
       eventData.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
 
-      const labels = eventData.map((dataItem) => {
-        const eventDate = new Date(dataItem.eventDate);
-        const startOfMonth = new Date(eventDate.getFullYear(), eventDate.getMonth(), 1);
-        return moment(startOfMonth).format('MMM YYYY');
-      });
+      const labels = eventData.map((dataItem) => moment(dataItem.eventDate).format('MMM D'));
       const values = eventData.map((dataItem) => dataItem.eventCount);
 
       const chartContainer = document.createElement('div');
@@ -72,9 +73,9 @@ function AdminCharts() {
             x: {
               type: 'time',
               time: {
-                unit: 'month',
+                unit: 'day',
                 displayFormats: {
-                  month: 'MMM YYYY',
+                  day: 'MMM D',
                 },
               },
               ticks: {
@@ -95,7 +96,7 @@ function AdminCharts() {
     });
   }
 
-  return <center><div id="chartContainer"></div></center>;
+  return  <ProtectedRoute allowedRoles={['admin']}><center><div id="chartContainer" className="chart-container"></div></center></ProtectedRoute>;
 }
 
 export default AdminCharts;

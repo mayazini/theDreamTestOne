@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -34,6 +35,7 @@ function UserList() {
   };
 
   return (
+    <ProtectedRoute allowedRoles={['admin']}>
     <div className="container">
       <h1>User List</h1>
       <table className="table">
@@ -61,6 +63,7 @@ function UserList() {
         </tbody>
       </table>
     </div>
+    </ProtectedRoute>
   );
 }
 
