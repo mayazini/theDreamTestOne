@@ -29,6 +29,7 @@ function App() {
     <UserProvider>
     <Router>
       <div className="app-wrapper">
+        <div className="page-container content-container">
         <Navbar />
           <Routes>          
             <Route exact path="/" element={<Home />} />
@@ -49,6 +50,7 @@ function App() {
             <Route path='/MyComponent' element={<MyComponent />} />
             <Route exact path="/ViewApplicants/:projectId" element={<ViewApplicants />}  />
           </Routes>
+        </div>
         <Footer />
       </div>
     </Router>

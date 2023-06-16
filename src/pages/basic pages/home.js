@@ -8,7 +8,6 @@ function Home() {
 
   return (
     <div className="content-wrapper">
-      
       <section className="txtArea">
       <div class="left-column">
       <h1>who do you want to be?</h1>

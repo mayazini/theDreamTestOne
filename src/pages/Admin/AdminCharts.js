@@ -23,36 +23,36 @@ function AdminCharts() {
   }
 
   function displayChartData(chartData) {
-    const groupedData = {};
-    const eventTypesSet = new Set(); // Keep track of unique event types
-    
+    const eventTypes = new Set();
+  
     chartData.forEach((dataItem) => {
-      const eventType = dataItem.EventType;
-      if (!eventTypesSet.has(eventType)) {
-        eventTypesSet.add(eventType);
-        groupedData[eventType] = [];
-      }
-      groupedData[eventType].push(dataItem);
+      const eventType = dataItem.eventType;
+      eventTypes.add(eventType);
     });
-
-    Object.keys(groupedData).forEach((eventType) => {
-      const eventData = groupedData[eventType];
+  
+    const chartContainer = document.getElementById('chartContainer');
+    chartContainer.innerHTML = ''; // Clear previous content
+  
+    eventTypes.forEach((eventType) => {
+      const eventData = chartData.filter((dataItem) => dataItem.eventType === eventType);
       eventData.sort((a, b) => new Date(a.eventDate) - new Date(b.eventDate));
-
-      const labels = eventData.map((dataItem) => moment(dataItem.eventDate).format('MMM D'));
+  
+      const labels = eventData.map((dataItem) =>
+        moment(dataItem.eventDate).format('MMM D')
+      );
       const values = eventData.map((dataItem) => dataItem.eventCount);
-
-      const chartContainer = document.createElement('div');
-      chartContainer.className = 'chart-container';
-      document.getElementById('chartContainer').appendChild(chartContainer);
-
+  
+      const chartDiv = document.createElement('div');
+      chartDiv.className = 'chart-container';
+      chartContainer.appendChild(chartDiv);
+  
       const chartTitle = document.createElement('h2');
       chartTitle.textContent = eventType;
-      chartContainer.appendChild(chartTitle);
-
+      chartDiv.appendChild(chartTitle);
+  
       const chartCanvas = document.createElement('canvas');
-      chartContainer.appendChild(chartCanvas);
-
+      chartDiv.appendChild(chartCanvas);
+  
       new Chart(chartCanvas, {
         type: 'line',
         data: {
@@ -95,6 +95,7 @@ function AdminCharts() {
       });
     });
   }
+  
 
   return  <ProtectedRoute allowedRoles={['admin']}><center><div id="chartContainer" className="chart-container"></div></center></ProtectedRoute>;
 }

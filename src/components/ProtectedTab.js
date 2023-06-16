@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../pages/UserContext';
-import Tab from 'react-bootstrap/Tab';
+import TabPane from 'react-bootstrap/TabPane';
 
 const ProtectedTab = ({ children, allowedRoles, eventKey, title }) => {
+  console.log('ProtectedTab is being rendered');
   const { user } = useContext(UserContext);
-  let userRole = 'guest';
 
-  if (user !== null) {
-    userRole = user.isAdmin ? 'admin' : 'loggedIn';
+  if (!user) {
+    return null; // Hide the tab if user is not logged in
   }
+
+  const userRole = user.isAdmin ? 'admin' : 'loggedIn';
   console.log(userRole); // Log the user role
+ 
   if (allowedRoles.includes(userRole)) {
-    return <Tab eventKey={eventKey} title={title}>{children}</Tab>;
+    return <TabPane eventKey={eventKey} title={title} >{children}</TabPane>;
   } else {
-      return null; 
+    return <TabPane eventKey={eventKey} title={title} className='hidden'>{children}</TabPane>;
   }
 };
 

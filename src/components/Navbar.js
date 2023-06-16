@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Nav, NavLink, NavMenu } 
-    from "./NavbarElements";
-  import Dropdown from 'react-bootstrap/Dropdown';
-  import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
+  from "./NavbarElements";
+import Dropdown from 'react-bootstrap/Dropdown';
+import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import './../style.css';
 import Logo from ".././images/logo.png";
 import GetStarted from ".././images/getStarted.jpeg";

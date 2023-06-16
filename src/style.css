@@ -152,3 +152,22 @@ html, body, #root {
     height: 400px;
     margin-bottom: -50px;
   }
+
+  .footer {
+    
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 100px; /* Adjust the value to match the height of your footer */
+  }
+
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 150vh;
+  }
+  
+  .content-container {
+    flex: 1;
+  }
+  
