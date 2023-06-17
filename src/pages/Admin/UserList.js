@@ -57,9 +57,9 @@ function UserList() {
               <td>{user.isAdmin ? 'Yes' : 'No'}</td>
               <td>{user.email}</td>
               <td>
-                <button className="btn btn-danger" onClick={() => handleDeleteUser(user.userName)}>
-                  Delete
-                </button>
+                  <button className="btn btn-danger" onClick={() => handleDeleteUser(user.userName)}>
+                    Delete
+                  </button>
               </td>
             </tr>
           ))}

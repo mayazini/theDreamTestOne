@@ -3,6 +3,7 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-reac
 import { UserContext } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrash, FaEnvelopeOpenText } from 'react-icons/fa';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function UsersSentMessages() {
 
@@ -61,6 +62,7 @@ function UsersSentMessages() {
   };
 
   return (
+    <ProtectedRoute allowedRoles={['admin','loggedIn']}>
     <div className="content-wrapper">
       <div className="mb-3">
         
@@ -98,7 +100,7 @@ function UsersSentMessages() {
               </td>
               <td>
                 <MDBBtn color="link" rounded size="sm" onClick={() => handleMoreClick(item.id)}>
-                  More
+                  More<FaEnvelopeOpenText />
                 </MDBBtn>
                 <MDBBtn color="danger" rounded size="sm" onClick={() => handleDeleteMessage(item.id)}>
                   move to trash<FaTrash />
@@ -109,6 +111,7 @@ function UsersSentMessages() {
         </MDBTableBody>
       </MDBTable>
     </div>
+    </ProtectedRoute>
   );
 }
 

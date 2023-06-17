@@ -3,6 +3,7 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-reac
 import { UserContext } from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrash, FaEnvelopeOpenText } from 'react-icons/fa';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function MyInbox() {
   const [inboxData, setInboxData] = useState([]);
@@ -72,9 +73,9 @@ function MyInbox() {
   };
 
   return (
+    <ProtectedRoute allowedRoles={['admin','loggedIn']}>
     <div className="content-wrapper">
-      <div className="mb-3">
-        
+      <div className="mb-3">    
       </div>
       <MDBTable align="middle">
         <MDBTableHead>
@@ -128,6 +129,7 @@ function MyInbox() {
         </MDBTableBody>
       </MDBTable>
     </div>
+    </ProtectedRoute>
   );
 }
 

@@ -4,6 +4,7 @@ import { UserContext } from '../UserContext';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBRow, MDBContainer } from 'mdb-react-ui-kit';
 import '../../designPages/MessageViewStyle.css';
 import SendMessage from './sendMessage';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function MessageView() {
   const { messageId } = useParams();
@@ -38,6 +39,7 @@ function MessageView() {
   }
 
   return (
+    <ProtectedRoute allowedRoles={['admin','loggedIn']}>
     <div className="content-wrapper">
       <MDBContainer>
         <center>
@@ -70,6 +72,7 @@ function MessageView() {
         </center>
       </MDBContainer>
     </div>
+    </ProtectedRoute>
   );
 }
 

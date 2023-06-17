@@ -3,6 +3,7 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBRadio, MDBRo
 import { UserContext } from '../UserContext';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { FaTrash, FaEnvelopeOpenText } from 'react-icons/fa';
+import ProtectedRoute from '../../components/ProtectedRoute';
 
 function MessagesInTrash() {
 
@@ -62,7 +63,8 @@ function MessagesInTrash() {
   };
 
   return (
-<>
+    <ProtectedRoute allowedRoles={['admin','loggedIn']}>
+    <>
   <div className="mb-3">
     <center>
       <h1>Trash</h1>
@@ -114,6 +116,7 @@ function MessagesInTrash() {
     </MDBTable>
   </div>
 </>
+</ProtectedRoute>
   );
 }
 

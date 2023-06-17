@@ -3,16 +3,14 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import 'bootstrap/dist/css/bootstrap.min.css';  
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import MyCinemaCreations from './cinema/myCinemaCreations';
 import MyCreationsBySpace from '../components/MyCreationsBySpace';
 import ".././style.css"
+import ProtectedRoute from '../components/ProtectedRoute';
 
 function MyCreations() {
-
-
   return (
+    <ProtectedRoute allowedRoles={['admin','loggedIn']}>
     <>
-
       <div class="page-container">
         <h1>My  Creations</h1>
         <div class="tab-container">
@@ -37,10 +35,8 @@ function MyCreations() {
           </Tabs>
         </div>
       </div>
-
-      
-  
     </>
+    </ProtectedRoute>
   );
 }
 

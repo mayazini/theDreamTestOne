@@ -18,12 +18,26 @@ function Register() {
   const handleRegister = (event) => {
     event.preventDefault();
 
+    // Check if all fields are filled
+    if (!username || !email || !firstName || !lastName || !password || !repeatPassword) {
+      setErrorMessage('Please fill in all fields');
+      return;
+    }
+
     // Check if the repeated password matches the original password
     if (password !== repeatPassword) {
       setErrorMessage("Passwords don't match. Please try again.");
       return;
     }
-    setErrorMessage("");
+
+    // Check password strength
+    if (!isPasswordStrong(password)) {
+      setErrorMessage(
+        'Password should be at least 8 characters long, contain at least one special character, one uppercase letter, and one number.'
+      );
+      return;
+    }
+
     inputData(userData);
   };
 
@@ -61,6 +75,12 @@ function Register() {
         setErrorMessage('Username already taken. Please try again.');
         // Handle the registration error
       });
+
+  // Check password strength
+  const isPasswordStrong = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*\s).{8,}$/;
+    return passwordRegex.test(password);
+  };
 
   return (
     <ProtectedRoute allowedRoles={['guest']}>

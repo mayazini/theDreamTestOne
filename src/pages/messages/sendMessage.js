@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { UserContext } from '../UserContext';
-
+import ProtectedRoute
+ from '../../components/ProtectedRoute';
 function SendMessage() {
   const [message, setMessage] = useState('');
   const [senderName, setSenderName] = useState('');
@@ -60,6 +61,7 @@ function SendMessage() {
   };
 
   return (
+    <ProtectedRoute allowedRoles={['admin','loggedIn']}>
     <div className="content-wrapper">
     <div class="col-lg-6 mb-5 mb-lg-0">
     <h1>Send Message:</h1>
@@ -123,10 +125,10 @@ function SendMessage() {
                 </div>
         </form>
       </div>
-    </div>
-  
+    </div>  
   </div>
   </div>
+  </ProtectedRoute>
   )
 }
 
