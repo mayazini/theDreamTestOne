@@ -20,7 +20,7 @@ import MessagesInTrash from './pages/messages/MessagesInTrash';
 import AdminCharts from './pages/Admin/AdminCharts';
 import UserList from './pages/Admin/UserList';
 import ViewApplicants from './pages/ViewApplicants';
-
+import About from './pages/basic pages/About';
 function App() {
   return (
     <UserProvider>
@@ -36,6 +36,7 @@ function App() {
             <Route path="/inbox/:messageId" element={<MessageView />} />
             <Route path='/register' element={<Register />} />
             <Route path='/myCreations' element={<MyCreations />} />
+            <Route path='/About' element={<About />} />
             <Route path='/cinemaSpace' element={<Cinema />} />
             <Route path='/RetailSpace' element={<RetailSpace />} />
             <Route path='/SentMessages' element={<SentMessages />} />

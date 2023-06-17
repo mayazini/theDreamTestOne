@@ -3,8 +3,8 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import { Chip } from '@mui/material';
 import { Done, HourglassEmpty, Clear } from '@mui/icons-material';
 
-function ApplicationsOfUser({applicantName}) {
-  const [applicants, setApplicants] = useState([]);
+function ApplicationsOfUser({spaceName, applicantName}) {
+  const [applicants, setApplicants] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
@@ -12,13 +12,16 @@ function ApplicationsOfUser({applicantName}) {
   }, []);
 
   const fetchApplicants = () => {
-    console.log(applicantName)
-    fetch(`https://localhost:7225/api/Applications/ApplicationsByApplicantName/${applicantName}`)
-      .then((response) => response.json())
+    fetch(`https://localhost:7225/api/Applications/ApplicationsByApplicantName/${spaceName}/${applicantName}`)
+      .then((response) => {
+        if(!response.ok) throw new Error("No applications found");
+        return response.json();
+      })
       .then((data) => {
         setApplicants(data);
       })
       .catch((error) => {
+        setApplicants(null);
         console.error('Error:', error);
       });
   };
@@ -58,6 +61,7 @@ function ApplicationsOfUser({applicantName}) {
   return (
     <ProtectedRoute allowedRoles={['loggedIn', 'admin']}>
       <div className="container">
+      {applicants ? (
         <table className="table">
           <thead>
             <tr>
@@ -71,7 +75,7 @@ function ApplicationsOfUser({applicantName}) {
             </tr>
           </thead>
           <tbody>
-            {applicants.map((application) => (
+            {applicants && applicants.map((application) => (
               <tr key={application.id}>
                  <td>{application.project.projectName}</td>
                 <td>{application.requirement.description}</td>
@@ -95,6 +99,9 @@ function ApplicationsOfUser({applicantName}) {
             ))}
           </tbody>
         </table>
+        ) : (
+          <p>No applications found.</p>
+      )}
       </div>
     </ProtectedRoute>
   );

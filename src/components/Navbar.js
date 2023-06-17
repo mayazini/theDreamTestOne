@@ -69,6 +69,9 @@ function Navbar() {
                     <NavLink to="/" activeStyle>
                       Home page
                     </NavLink>
+                    <NavLink to="/About" activeStyle>
+                     About
+                    </NavLink>
                     {!user &&(<NavLink to="/login" activeStyle>
                       Login
                     </NavLink>)}

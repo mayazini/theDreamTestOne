@@ -123,9 +123,6 @@ const Login = () => {
                     value={password}
                     onChange={handlePasswordChange}
                   />
-                  <p className="forgot-password text-right mt-2">
-                    Forgot <a href="#">password?</a>
-                  </p>
                 </div>
                 <div className="d-grid gap-2 mt-3">
                   <button type="submit" className="btn btn-primary"> 

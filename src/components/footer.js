@@ -12,22 +12,13 @@ export default function Footer() {
         </div>
 
         <div>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="facebook-f" />
+          <a href='https://m.youtube.com/channel/UCd0gqzV0hskK1z2Pui9lmDA?fbclid=PAAaZWxtk3GAsqcZJ7MMx8G-RdbUilDBF0kC_224Vgl7Cdu3a3dS08sj5_RoA_aem_th_AcRrVjmEHR6Tp_SyAqeLqtc6X6tNxvn95EO49Q5I7afOgVYQrBqzqXeiOshZ4-S1HUI' className='me-4 text-reset'>
+            <MDBIcon fab icon="youtube" />
           </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="twitter" />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="google" />
-          </a>
-          <a href='' className='me-4 text-reset'>
+          <a href='https://instagram.com/thedream4us?igshid=NTc4MTIwNjQ2YQ==' className='me-4 text-reset'>
             <MDBIcon fab icon="instagram" />
           </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="linkedin" />
-          </a>
-          <a href='' className='me-4 text-reset'>
+          <a href='https://github.com/mayazini' className='me-4 text-reset'>
             <MDBIcon fab icon="github" />
           </a>
         </div>
@@ -42,20 +33,20 @@ export default function Footer() {
                 The Dream
               </h6>
               <p>
-                be who you want to be and do what  you love to do 
+                Be who you want to be and do what you love to do 
               </p>
             </MDBCol>
 
             <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>feilds</h6>
               <p>
-                <a href='#!' className='text-reset'>
+                <a href='/cinemaSpace' className='text-reset'>
                   Cinema
                 </a>
               </p>
               <p>
-                <a href='#!' className='text-reset'>
-                  Products
+                <a href='retailSpace' className='text-reset'>
+                  Retail
                 </a>
               </p>
               <p>
@@ -68,18 +59,13 @@ export default function Footer() {
             <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
               <p>
-                <a href='../home' className='text-reset'>
+                <a href='/home' className='text-reset'>
                   home page
                 </a>
               </p>
               <p>
-                <a href='../login' className='text-reset'>
+                <a href='/login' className='text-reset'>
                   login
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  projects
                 </a>
               </p>
              
