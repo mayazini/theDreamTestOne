@@ -94,7 +94,7 @@ function ApplyModal({ selectedRequirement, projectId,handleClose, handleApply })
           <MDBCardTitle>Apply Now</MDBCardTitle>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email/phone number</label>
+              <label htmlFor="email" className="form-label">Email</label>
               <input type="email" className="form-control" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <div className="mb-3">

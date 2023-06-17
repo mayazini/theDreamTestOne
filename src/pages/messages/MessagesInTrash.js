@@ -34,7 +34,8 @@ function MessagesInTrash() {
 
   // Handle click on "More" button
   const handleMoreClick = (messageId) => {
-    Navigate(`/inbox/${messageId}`);
+    console.log(messageId);
+    navigate(`/inbox/${messageId}`);
   };
 
   // Handle delete message
