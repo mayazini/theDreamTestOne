@@ -5,10 +5,10 @@ import { UserContext } from '../pages/UserContext';
 import MyProjectCard from './MyProjectCards';
 import ApplicationsOfUser from './ApplicationsOfUser';
 
-const ProjectCard = ({ project}) => {
+const ProjectCard = ({ project,spaceName}) => {
   return (
     <MDBCol md='4' className='mb-4'>
-      <MyProjectCard project={project} />
+      <MyProjectCard spaceName={spaceName} project={project} />
     </MDBCol>
   );
 };
@@ -51,7 +51,7 @@ function MyCinemaCreations({spaceName }) {
           {chunkProjects(projects, 3).map((row, index) => (
             <MDBRow className='card-row' key={index}>
               {row.map((project, i) => (
-                <ProjectCard key={project.Id} project={project} />
+                <ProjectCard  spaceName={spaceName}  key={project.Id} project={project} />
               ))}
             </MDBRow>
           ))}

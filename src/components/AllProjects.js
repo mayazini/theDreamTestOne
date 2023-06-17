@@ -8,11 +8,11 @@ import "../style.css";
 import GenericProjectC from './GenericProjectCard';
 import MyCreationsBySpace from './MyCreationsBySpace';
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project,spaceName }) => {
   return (
     <MDBCol md='4' className='mb-4'>
     <div className='project-card'>
-      <GenericProjectC project={project} />
+      <GenericProjectC spaceName={spaceName} project={project} />
     </div>
   </MDBCol>
   );
@@ -56,7 +56,7 @@ const ProjectCard = ({ project }) => {
               {chunkProjects(projects, 3).map((row, index) => (
                 <MDBRow className='card-row' key={index}>
                   {row.map((project, i) => (
-                    <ProjectCard key={project.id} project={project} />
+                    <ProjectCard spaceName={spaceName}  key={project.id} project={project} />
                   ))}
                 </MDBRow>
               ))}
