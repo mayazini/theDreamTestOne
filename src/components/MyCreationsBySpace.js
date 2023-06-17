@@ -25,6 +25,7 @@ function MyCinemaCreations({spaceName }) {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           setProjects(data);
         })
         .catch((error) => {
@@ -57,7 +58,8 @@ function MyCinemaCreations({spaceName }) {
         </MDBRow>
         <MDBRow className='bg mb-3' style={{ borderTop: 'solid' }}>
           <h1>Projects I Joined</h1>
-          <ApplicationsOfUser applicantName={user.username}></ApplicationsOfUser>
+          {user&&(<ApplicationsOfUser applicantName={user.username}></ApplicationsOfUser>)}
+          
         </MDBRow>
       </MDBContainer>
     </div>

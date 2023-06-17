@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProtectedRoute from '../components/ProtectedRoute';
+import { useNavigate } from 'react-router-dom';
 
 function ViewApplicants() {
   const [applicants, setApplicants] = useState([]);
   const { projectId } = useParams();
   const [errorMessage, setErrorMessage] = useState('');
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     fetchApplicants();
   }, []);
@@ -19,6 +21,10 @@ function ViewApplicants() {
         console.log(data)
       })
       .catch((error) => {
+        setErrorMessage('Registration successful. Redirecting to login page...');
+        setTimeout(() => {
+          navigate('/myCreations');
+        }, 3000);
         console.error('Error:', error);
       });
   };
@@ -90,8 +96,9 @@ function ViewApplicants() {
       });
   };
 
-  return (
+  return ( 
     <ProtectedRoute allowedRoles={['loggedIn','admin']}>
+      {errorMessage && <div className='alert alert-danger mt-3'>{errorMessage}</div>}
     <div className="container">
       <h1>Project Applicants</h1>
       <table className="table">

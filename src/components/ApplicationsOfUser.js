@@ -17,7 +17,6 @@ function ApplicationsOfUser({applicantName}) {
       .then((response) => response.json())
       .then((data) => {
         setApplicants(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error('Error:', error);

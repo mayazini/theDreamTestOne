@@ -52,30 +52,31 @@ function Register() {
   };
 
   const inputData = (userData) =>
-    fetch('https://localhost:7225/api/User/Register', {
-      method: 'Put',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(userData)
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Register request failed');
-        }
-        // Handle the successful registration
+  fetch('https://localhost:7225/api/User/Register', {
+    method: 'Put',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userData)
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          throw new Error(data.error);
+        });
+      } else {
         console.log('Registration successful');
         setErrorMessage('Registration successful. Redirecting to login page...');
         setTimeout(() => {
           navigate('/login');
         }, 3000);
-      })
-      .catch((error) => {
-        console.error('Error:', error.message);
-        setErrorMessage('Username already taken. Please try again.');
-        // Handle the registration error
-      });
-
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error.message);
+      setErrorMessage(error.message);
+    });
+    
   // Check password strength
   const isPasswordStrong = (password) => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?!.*\s).{8,}$/;

@@ -48,7 +48,7 @@ function Navbar() {
                         Log Out
                       </Dropdown.Item>
                       <Dropdown.Item href="../sendMessage">
-                        send message
+                        Send message
                       </Dropdown.Item>
                       <Dropdown.Divider
                         style={{
@@ -57,9 +57,9 @@ function Navbar() {
                           borderWidth: '0px',
                         }}
                       />
-                      <Dropdown.Item href="../myInbox">my inbox</Dropdown.Item>
+                      <Dropdown.Item href="../myInbox">My inbox</Dropdown.Item>
                       <Dropdown.Item href="../myCreations">
-                        my creations
+                        My creations
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
@@ -67,10 +67,10 @@ function Navbar() {
                 
                   <>
                     <NavLink to="/" activeStyle>
-                      home page
+                      Home page
                     </NavLink>
                     {!user &&(<NavLink to="/login" activeStyle>
-                      login
+                      Login
                     </NavLink>)}
                     {user && user.isAdmin && (
                          <Dropdown>
@@ -85,11 +85,11 @@ function Navbar() {
                     )}
                   <Dropdown>
                   <Dropdown.Toggle id="dropdown-button"  style={{backgroundColor: 'white',color:"black",boxShadow: "none",border: 'none'}}>
-                    spaces
+                    Spaces
                   </Dropdown.Toggle>
                   <Dropdown.Menu variant="dark" style={{fontSize: '17px'}}>
-                    <Dropdown.Item href="../cinemaSpace"> cinema</Dropdown.Item>
-                    <Dropdown.Item href="../RetailSpace">retail</Dropdown.Item>
+                    <Dropdown.Item href="../cinemaSpace"> Cinema</Dropdown.Item>
+                    <Dropdown.Item href="../RetailSpace">Retail</Dropdown.Item>
                   </Dropdown.Menu >
                 </Dropdown>
                 </>
