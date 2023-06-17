@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ProtectedRoute from '../components/ProtectedRoute';
 
 function ViewApplicants() {
   const [applicants, setApplicants] = useState([]);
   const { projectId } = useParams();
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchApplicants();
@@ -27,7 +29,7 @@ function ViewApplicants() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ status: 'Approved' }),
+      body: JSON.stringify({ status: 'Accepted' }),
     })
       .then(() => {
         fetchApplicants();
@@ -53,14 +55,13 @@ function ViewApplicants() {
       });
   };
 
-  const handleDownload = async (uploadedFileName, userName) => {
+  const handleDownload = async (uploadedFileName, applicantName) => {
     if (!uploadedFileName) {
       console.error('No file has been uploaded');
       return;
     }
 
-    // Fetch the file data from your API
-    fetch(`https://localhost:7225/api/Applications/DownloadResume/${userName}/${uploadedFileName}`, {
+    fetch(`https://localhost:7225/api/Applications/DownloadResume/${applicantName}/${uploadedFileName}`, {
       method: 'GET',
     })
       .then((response) => {
@@ -81,13 +82,16 @@ function ViewApplicants() {
         link.click();
         // Clean up and remove the link
         link.parentNode.removeChild(link);
+        setErrorMessage('');
       })
       .catch((error) => {
+        setErrorMessage('Failed to download the resume.');
         console.error('Error:', error.message);
       });
   };
 
   return (
+    <ProtectedRoute allowedRoles={['loggedIn','admin']}>
     <div className="container">
       <h1>Project Applicants</h1>
       <table className="table">
@@ -111,10 +115,11 @@ function ViewApplicants() {
               <td>{application.Message}</td>
               <td>{application.ApplicationStatus === 'Pending' ? 'Not viewed' : application.ApplicationStatus}</td>
               <td>
-                <button onClick={() => handleDownload(application.ResumePath, application.UserName)}>Download</button>
+                <button onClick={() => handleDownload(application.ResumePath, application.ApplicantName)}>Download</button>
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
               </td>
               <td>
-                {application.Status === 'Accepted' ? (
+                {application.ApplicationStatus === 'Accepted' ? (
                   <button className="btn btn-warning" onClick={() => handleDisapproveUser(application.Id, application.UserName)}>
                     Disapprove
                   </button>
@@ -132,6 +137,7 @@ function ViewApplicants() {
         </tbody>
       </table>
     </div>
+    </ProtectedRoute>
   );
 }
 
