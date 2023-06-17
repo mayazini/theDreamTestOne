@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { UserContext } from '../pages/UserContext';
 import MyProjectCard from './MyProjectCards';
+import ApplicationsOfUser from './ApplicationsOfUser';
 
 const ProjectCard = ({ project}) => {
   return (
@@ -56,6 +57,7 @@ function MyCinemaCreations({spaceName }) {
         </MDBRow>
         <MDBRow className='bg mb-3' style={{ borderTop: 'solid' }}>
           <h1>Projects I Joined</h1>
+          <ApplicationsOfUser username={user.username}></ApplicationsOfUser>
         </MDBRow>
       </MDBContainer>
     </div>
