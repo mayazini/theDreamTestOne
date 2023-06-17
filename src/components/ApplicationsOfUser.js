@@ -3,7 +3,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import { Chip } from '@mui/material';
 import { Done, HourglassEmpty, Clear } from '@mui/icons-material';
 
-function ApplicationsOfUser({username}) {
+function ApplicationsOfUser({applicantName}) {
   const [applicants, setApplicants] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -12,7 +12,8 @@ function ApplicationsOfUser({username}) {
   }, []);
 
   const fetchApplicants = () => {
-    fetch(`https://localhost:7225/api/Applications/ApplicationsByApplicantName/${username}`)
+    console.log(applicantName)
+    fetch(`https://localhost:7225/api/Applications/ApplicationsByApplicantName/${applicantName}`)
       .then((response) => response.json())
       .then((data) => {
         setApplicants(data);
@@ -58,37 +59,37 @@ function ApplicationsOfUser({username}) {
   return (
     <ProtectedRoute allowedRoles={['loggedIn', 'admin']}>
       <div className="container">
-        <h1>Project Applicants</h1>
         <table className="table">
           <thead>
             <tr>
+             <th>Project name</th>
               <th>Requirement</th>
-              <th>Applicant name</th>
+              <th>Creator name</th>
               <th>Email</th>
               <th>Message</th>
               <th>Status</th>
               <th>Resume</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {applicants.map((application) => (
-              <tr key={application.Id}>
-                <td>{application.ReqDescription}</td>
-                <td>{application.ApplicantName}</td>
-                <td>{application.Email}</td>
-                <td>{application.Message}</td>
+              <tr key={application.id}>
+                 <td>{application.project.projectName}</td>
+                <td>{application.requirement.description}</td>
+                <td>{application.project.creatorName}</td>
+                <td>{application.email}</td>
+                <td>{application.message}</td>
                 <td>
-                  {application.ApplicationStatus === 'Pending' ? (
+                  {application.status === 'Pending' ? (
                     <Chip label="Pending" color="default" icon={<HourglassEmpty />} />
-                  ) : application.ApplicationStatus === 'Accepted' ? (
+                  ) : application.status === 'Accepted' ? (
                     <Chip label="Accepted" color="success" icon={<Done />} />
                   ) : (
                     <Chip label="Declined" color="error" icon={<Clear />} />
                   )}
                 </td>
                 <td>
-                  <button onClick={() => handleDownload(application.ResumePath, application.ApplicantName)}>Download</button>
+                  <button onClick={() => handleDownload(application.resumePath, application.applicantName)}>Download</button>
                   {errorMessage && <div className="error-message">{errorMessage}</div>}
                 </td>
               </tr>

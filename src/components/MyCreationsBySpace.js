@@ -57,7 +57,7 @@ function MyCinemaCreations({spaceName }) {
         </MDBRow>
         <MDBRow className='bg mb-3' style={{ borderTop: 'solid' }}>
           <h1>Projects I Joined</h1>
-          <ApplicationsOfUser username={user.username}></ApplicationsOfUser>
+          <ApplicationsOfUser applicantName={user.username}></ApplicationsOfUser>
         </MDBRow>
       </MDBContainer>
     </div>
